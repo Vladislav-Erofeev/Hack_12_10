@@ -25,4 +25,10 @@ public class PersonController {
                 .map(personMapper::personToPersonDTO)
                 .collect(Collectors.toList());
     }
+
+    @GetMapping()
+    public String hello() {
+        return "Hello, from secured part";
+    }
+
 }
