@@ -3,6 +3,7 @@ package tft.GameBackend.mappers;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+import tft.GameBackend.dto.AuthorDTO;
 import tft.GameBackend.dto.FriendDTO;
 import tft.GameBackend.dto.PersonDTO;
 import tft.GameBackend.entities.Person;
@@ -16,4 +17,7 @@ public interface PersonMapper {
 
     @Mapping(target = "name", source = "username")
     FriendDTO personToFriendDTO(Person person);
+
+    @Mapping(target = "name", source = "username")
+    AuthorDTO personToAuthorDTO(Person person);
 }
