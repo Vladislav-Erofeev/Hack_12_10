@@ -27,7 +27,7 @@ public class AuthenticationService {
     user.setRole(Role.USER);
 
     var savedUser = repository.save(user);
-    var jwtToken = jwtService.generateToken(new PersonDetails(user)); //todo
+    var jwtToken = jwtService.generateToken(new PersonDetails(user));
     return AuthenticationResponse.builder()
         .token(jwtToken)
         .build();
