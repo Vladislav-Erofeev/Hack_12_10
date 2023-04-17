@@ -6,6 +6,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import tft.GameBackend.reopsitories.FeedRepository;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -33,27 +34,26 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "friend_request",
     joinColumns = @JoinColumn(name = "person_from"),
     inverseJoinColumns = @JoinColumn(name = "person_to"))
     private List<Person> sentFriendsRequests;
 
-    @JsonIgnore
     @ManyToMany(mappedBy = "sentFriendsRequests")
     private List<Person> receivedFriendsRequests;
 
-    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "friends",
     joinColumns = @JoinColumn(name = "person1_id"),
     inverseJoinColumns = @JoinColumn(name = "person2_id"))
     private List<Person> friendsList1;
 
-    @JsonIgnore
     @ManyToMany(mappedBy = "friendsList1")
     private List<Person> friendsList2;
+
+    @OneToMany(mappedBy = "author")
+    private List<Feed> feeds;
 
     public void addSentFriendsRequests(Person person) {
         if(sentFriendsRequests == null)
@@ -77,6 +77,12 @@ public class Person {
         if(friendsList2 == null)
             friendsList2 = new LinkedList<>();
         friendsList2.add(person);
+    }
+
+    public void addFeed(Feed feed) {
+        if(feeds == null)
+            feeds = new LinkedList<>();
+        feeds.add(feed);
     }
 
 }
