@@ -1,15 +1,13 @@
 import {
-    Collapse, DropdownItem, DropdownMenu,
-    DropdownToggle,
+    Collapse,
     Nav,
     Navbar,
-    NavbarBrand,
     NavbarToggler,
     NavItem,
     NavLink,
-    UncontrolledDropdown
 } from "reactstrap";
 import React, {useState} from "react";
+
 
 function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -17,28 +15,40 @@ function NavBar() {
     const toggle = () => setIsOpen(!isOpen);
 
     return (
-        <div>
-            <Navbar>
-                <NavbarBrand href="/">reactstrap</NavbarBrand>
+        <div style={{background: "#04597c"}}>
+            <Navbar expand="md" dark className="fs-5 my-container py-3">
+                <Nav navbar>
+                    <NavItem>
+                        <NavLink href="/">Главная</NavLink>
+                    </NavItem>
+                </Nav>
                 <NavbarToggler onClick={toggle}/>
                 <Collapse isOpen={isOpen} navbar>
-                    <Nav className="me-auto" navbar>
+                    <Nav navbar>
                         <NavItem>
-                            <NavLink href="/">Главная</NavLink>
+                            <NavLink href="/news">Новости</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/">Новости</NavLink>
+                            <NavLink href="/people">Люди</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/">Люди</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="/">Чат</NavLink>
+                            <NavLink href="/chat">Чат</NavLink>
                         </NavItem>
                     </Nav>
-
+                    <Nav style={{marginLeft: "auto"}} navbar>
+                        <NavItem>
+                            <NavLink href="/profile">Профиль</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="/game">Играть</NavLink>
+                        </NavItem>
+                    </Nav>
                 </Collapse>
+
+
             </Navbar>
         </div>
     );
 }
+
+export default NavBar;
