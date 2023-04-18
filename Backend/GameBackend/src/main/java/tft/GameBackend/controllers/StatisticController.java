@@ -5,14 +5,11 @@ import org.springframework.web.bind.annotation.*;
 import tft.GameBackend.dto.NewScoreDTO;
 import tft.GameBackend.dto.ScoreDTO;
 import tft.GameBackend.entities.Person;
-import tft.GameBackend.entities.Score;
-import tft.GameBackend.errors.FeedNotFoundException;
 import tft.GameBackend.errors.PersonNotFoundException;
 import tft.GameBackend.mappers.ScoreMapper;
 import tft.GameBackend.services.ScoreService;
 import tft.GameBackend.utils.AuthenticatedPersonService;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,8 +45,8 @@ public class StatisticController {
      * Уставноление счета пользователя
      *
      * @param newScoreDTO - Объект сущности вида {
-     *                         "body": содержание поста
-     *                         }
+     *                    "body": содержание поста
+     *                    }
      * @throws PersonNotFoundException
      */
 
@@ -60,8 +57,7 @@ public class StatisticController {
         if (person.getBestScore() < newScoreDTO.getScore()) {
             scoreService.setBestScoreById(person.getId(), newScoreDTO.getScore());
             scoreService.addScoreById(person.getId(), newScoreDTO.getScore());
-        }
-        else
+        } else
             scoreService.addScoreById(person.getId(), newScoreDTO.getScore());
     }
 
