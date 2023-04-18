@@ -4,7 +4,6 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tft.GameBackend.dto.PersonDTO;
 import tft.GameBackend.entities.Person;
 import tft.GameBackend.errors.PersonNotFoundException;
 import tft.GameBackend.reopsitories.PersonRepository;
@@ -60,6 +59,11 @@ public class PersonService {
         if (person.isEmpty())
             throw new PersonNotFoundException("person with id=" + id + " not found");
         return person.get();
+    }
+
+    @Transactional
+    public void save(Person person) {
+        personRepository.save(person);
     }
 
 }

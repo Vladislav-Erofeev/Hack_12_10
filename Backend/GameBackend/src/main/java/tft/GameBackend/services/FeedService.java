@@ -1,9 +1,7 @@
 package tft.GameBackend.services;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,7 +41,7 @@ public class FeedService {
 
     public Feed getById(long id) throws FeedNotFoundException {
         Optional<Feed> optionalFeed = feedRepository.findById(id);
-        if(optionalFeed.isEmpty())
+        if (optionalFeed.isEmpty())
             throw new FeedNotFoundException("Feed with id=" + id + " not found");
         return optionalFeed.get();
     }
@@ -51,7 +49,7 @@ public class FeedService {
     @Transactional
     public void edit(long id, String body) throws FeedNotFoundException {
         Optional<Feed> optionalFeed = feedRepository.findById(id);
-        if(optionalFeed.isEmpty())
+        if (optionalFeed.isEmpty())
             throw new FeedNotFoundException("Feed with id=" + id + " not found");
         Feed feed = optionalFeed.get();
         feed.setBody(body);

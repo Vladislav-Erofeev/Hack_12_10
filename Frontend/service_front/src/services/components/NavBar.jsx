@@ -6,6 +6,8 @@ import {
     NavItem,
     NavLink,
 } from "reactstrap";
+import { NavLink as Li } from 'react-router-dom';
+
 import React, {useState} from "react";
 
 
@@ -19,33 +21,31 @@ function NavBar() {
             <Navbar expand="md" dark className="fs-5 my-container py-3">
                 <Nav navbar>
                     <NavItem>
-                        <NavLink href="/">Главная</NavLink>
+                        <NavLink to="/" tag={Li}>Главная</NavLink>
                     </NavItem>
                 </Nav>
                 <NavbarToggler onClick={toggle}/>
                 <Collapse isOpen={isOpen} navbar>
                     <Nav navbar>
                         <NavItem>
-                            <NavLink href="/news">Новости</NavLink>
+                            <NavLink to="/feeds" tag={Li}>Новости</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/people">Люди</NavLink>
+                            <NavLink to="/people" tag={Li}>Люди</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/chat">Чат</NavLink>
+                            <NavLink to="/chat" tag={Li}>Чат</NavLink>
                         </NavItem>
                     </Nav>
                     <Nav style={{marginLeft: "auto"}} navbar>
                         <NavItem>
-                            <NavLink href="/profile">Профиль</NavLink>
+                            <NavLink to="/profile/1" tag={Li}>Профиль</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/game">Играть</NavLink>
+                            <NavLink to="/game" tag={Li}>Играть</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>
-
-
             </Navbar>
         </div>
     );

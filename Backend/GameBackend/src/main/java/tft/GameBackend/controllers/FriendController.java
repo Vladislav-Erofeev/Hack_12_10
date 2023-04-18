@@ -3,7 +3,6 @@ package tft.GameBackend.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import tft.GameBackend.dto.FriendDTO;
 import tft.GameBackend.entities.Person;
@@ -29,11 +28,12 @@ public class FriendController {
     /**
      * GET - "/friends"
      * Получение списка друзей
+     *
      * @return массив объектов {
-     *  "id" : id пользователя
-     *  "name": имя пользователя
-     *  "email": адрес электронной почты
-     *  }
+     * "id" : id пользователя
+     * "name": имя пользователя
+     * "email": адрес электронной почты
+     * }
      */
     @GetMapping
     public List<FriendDTO> getFriendsList() throws PersonNotFoundException {
@@ -45,10 +45,11 @@ public class FriendController {
     /**
      * GET - "/friends/sent_requests"
      * Получение списка отправленных запросов на дружбу
+     *
      * @return массив объектов {
-     *     "id" : id пользователя
-     *     "name": имя пользователя
-     *     "email": адрес электронной почты
+     * "id" : id пользователя
+     * "name": имя пользователя
+     * "email": адрес электронной почты
      * }
      * @throws PersonNotFoundException
      */
@@ -62,11 +63,12 @@ public class FriendController {
     /**
      * GET - "/friends/received_requests"
      * Получение списка запросов на дружбу
+     *
      * @return массив объектов {
-     *      *     "id" : id пользователя
-     *      *     "name": имя пользователя
-     *      *     "email": адрес электронной почты
-     *      * }
+     * *     "id" : id пользователя
+     * *     "name": имя пользователя
+     * *     "email": адрес электронной почты
+     * * }
      * @throws PersonNotFoundException
      */
     @GetMapping("/received_requests")
@@ -79,6 +81,7 @@ public class FriendController {
     /**
      * POST - "/friends/send_request/{id}"
      * Отправление запроса на дружбу
+     *
      * @param personTo - id пользователя, который получит запрос
      * @return OK
      */
@@ -92,6 +95,7 @@ public class FriendController {
     /**
      * POST - "/friends/friend_request/{id}"
      * Принятие запроса на дружбу
+     *
      * @param personFrom - Отправитель запроса на дружбу
      * @return
      */
@@ -106,6 +110,7 @@ public class FriendController {
     /**
      * DELETE - "/friends/friend_request/{id}"
      * Отклонение запроса на дружбу
+     *
      * @param personFrom - отправитель запроса на дружбу
      * @return
      */

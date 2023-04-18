@@ -10,7 +10,6 @@ import tft.GameBackend.security.AuthenticationService;
 import tft.GameBackend.security.RegisterRequest;
 
 @RestController
-//@CrossOrigin(origins="http://localhost:3000")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
