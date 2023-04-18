@@ -6,6 +6,12 @@
     font-family: Montserrat, sans-serif;
 }
 
+.my-container {
+    max-width: 1280px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
 .my-btn {
     background: #fcc45c !important;
     font-weight: 500 !important;
