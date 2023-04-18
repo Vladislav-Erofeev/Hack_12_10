@@ -2,12 +2,9 @@ package tft.GameBackend.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import tft.GameBackend.entities.Person;
 
 @Data
 @NoArgsConstructor
-public class ScoreDTO {
-    long id;
+public class NewScoreDTO {
     int score;
-    Person person;
 }

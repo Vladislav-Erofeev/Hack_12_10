@@ -3,6 +3,7 @@ package tft.GameBackend.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,43 +18,44 @@ import java.util.List;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    long id;
 
-    private String username;
+    String username;
 
-    private String email;
+    String email;
 
-    private String password;
+    String password;
 
-    private int bestScore;
+    int bestScore;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    Role role;
 
     @ManyToMany
     @JoinTable(name = "friend_request",
     joinColumns = @JoinColumn(name = "person_from"),
     inverseJoinColumns = @JoinColumn(name = "person_to"))
-    private List<Person> sentFriendsRequests;
+    List<Person> sentFriendsRequests;
 
     @ManyToMany(mappedBy = "sentFriendsRequests")
-    private List<Person> receivedFriendsRequests;
+    List<Person> receivedFriendsRequests;
 
     @ManyToMany
     @JoinTable(name = "friends",
     joinColumns = @JoinColumn(name = "person1_id"),
     inverseJoinColumns = @JoinColumn(name = "person2_id"))
-    private List<Person> friendsList1;
+    List<Person> friendsList1;
 
     @ManyToMany(mappedBy = "friendsList1")
-    private List<Person> friendsList2;
+    List<Person> friendsList2;
 
     @OneToMany(mappedBy = "author")
-    private List<Feed> feeds;
+    List<Feed> feeds;
 
     public void addSentFriendsRequests(Person person) {
         if(sentFriendsRequests == null)

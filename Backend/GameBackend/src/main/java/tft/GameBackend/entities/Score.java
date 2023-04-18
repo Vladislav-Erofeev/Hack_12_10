@@ -5,6 +5,9 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Entity
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -20,6 +23,7 @@ public class Score {
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     Person person;
 
-
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
 }
