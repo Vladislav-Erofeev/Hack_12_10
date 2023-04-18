@@ -9,4 +9,4 @@ create table friend_request(
      person_to int references person(id),
      exp_date date not null
 )
--- drop table friend_request;
+-- rollback drop table friend_request;
