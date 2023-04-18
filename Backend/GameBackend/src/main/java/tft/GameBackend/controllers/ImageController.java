@@ -9,7 +9,6 @@ import tft.GameBackend.services.PersonService;
 import tft.GameBackend.utils.AuthenticatedPersonService;
 import tft.GameBackend.utils.ImageNameService;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,6 +26,7 @@ public class ImageController {
     /**
      * POST - "/person_image/add"
      * Загрузка фотографии пользователя
+     *
      * @param file - файл для загрузки
      * @throws IOException
      */
@@ -35,7 +35,7 @@ public class ImageController {
         Person person = authenticatedPersonService.getAuthenticatedPerson();
         String fileName = imageNameService.generate(file.getContentType());
 
-        if(!person.getUrl().isBlank()) {
+        if (!person.getUrl().isBlank()) {
             Files.delete(Path.of(UPLOAD_DIRECTORY + "/person/" + person.getUrl()));
         }
         Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY + "/person/", fileName);

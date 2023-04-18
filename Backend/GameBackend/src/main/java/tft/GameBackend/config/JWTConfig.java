@@ -19,32 +19,33 @@ import tft.GameBackend.security.PersonDetails;
 @RequiredArgsConstructor
 public class JWTConfig {
 
-  private final PersonRepository repository;
+    private final PersonRepository repository;
 
-  @Bean
-  public UserDetailsService userDetailsService() {
-    return username -> { Person person = repository.findByEmail(username)
-        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return new PersonDetails(person);
-    };
-  }
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return username -> {
+            Person person = repository.findByEmail(username)
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            return new PersonDetails(person);
+        };
+    }
 
-  @Bean
-  public AuthenticationProvider authenticationProvider() {
-    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-    authProvider.setUserDetailsService(userDetailsService());
-    authProvider.setPasswordEncoder(passwordEncoder());
-    return authProvider;
-  }
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
 
-  @Bean
-  public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-    return config.getAuthenticationManager();
-  }
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
 
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-  }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 }

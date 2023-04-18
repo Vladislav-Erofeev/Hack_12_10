@@ -10,25 +10,24 @@ import tft.GameBackend.security.AuthenticationService;
 import tft.GameBackend.security.RegisterRequest;
 
 @RestController
-//@CrossOrigin(origins="http://localhost:3000")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
-  private final AuthenticationService service;
+    private final AuthenticationService service;
 
-  @PostMapping("/registration")
-  public AuthenticationResponse register(
-      @RequestBody RegisterRequest request
-  ) {
-    return service.register(request);
-  }
-  @PostMapping("/login")
-  public AuthenticationResponse authenticate(
-      @RequestBody AuthenticationRequest request
-  ) {
-    return service.authenticate(request);
-  }
+    @PostMapping("/registration")
+    public AuthenticationResponse register(
+            @RequestBody RegisterRequest request
+    ) {
+        return service.register(request);
+    }
 
+    @PostMapping("/login")
+    public AuthenticationResponse authenticate(
+            @RequestBody AuthenticationRequest request
+    ) {
+        return service.authenticate(request);
+    }
 
 
 }

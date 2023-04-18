@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 public class ImageNameService {
 
     public String generate(String type) {
-        String name  = RandomStringUtils.random(30, true, true);
+        String name = RandomStringUtils.random(30, true, true);
         name += "." + type.substring(6);
-        return name.toString();
+        return name;
     }
 }

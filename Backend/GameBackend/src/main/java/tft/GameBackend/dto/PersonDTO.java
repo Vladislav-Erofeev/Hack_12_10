@@ -4,9 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import tft.GameBackend.entities.Person;
-
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor

@@ -1,14 +1,11 @@
 package tft.GameBackend.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import tft.GameBackend.reopsitories.FeedRepository;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,8 +35,8 @@ public class Person {
 
     @ManyToMany
     @JoinTable(name = "friend_request",
-    joinColumns = @JoinColumn(name = "person_from"),
-    inverseJoinColumns = @JoinColumn(name = "person_to"))
+            joinColumns = @JoinColumn(name = "person_from"),
+            inverseJoinColumns = @JoinColumn(name = "person_to"))
     private List<Person> sentFriendsRequests;
 
     @ManyToMany(mappedBy = "sentFriendsRequests")
@@ -47,8 +44,8 @@ public class Person {
 
     @ManyToMany
     @JoinTable(name = "friends",
-    joinColumns = @JoinColumn(name = "person1_id"),
-    inverseJoinColumns = @JoinColumn(name = "person2_id"))
+            joinColumns = @JoinColumn(name = "person1_id"),
+            inverseJoinColumns = @JoinColumn(name = "person2_id"))
     private List<Person> friendsList1;
 
     @ManyToMany(mappedBy = "friendsList1")
@@ -58,31 +55,31 @@ public class Person {
     private List<Feed> feeds;
 
     public void addSentFriendsRequests(Person person) {
-        if(sentFriendsRequests == null)
+        if (sentFriendsRequests == null)
             sentFriendsRequests = new LinkedList<>();
         sentFriendsRequests.add(person);
     }
 
     public void addReceivedFriendsRequests(Person person) {
-        if(receivedFriendsRequests == null)
+        if (receivedFriendsRequests == null)
             receivedFriendsRequests = new LinkedList<>();
         receivedFriendsRequests.add(person);
     }
 
     public void addFriendsList1(Person person) {
-        if(friendsList1 == null)
+        if (friendsList1 == null)
             friendsList1 = new LinkedList<>();
         friendsList1.add(person);
     }
 
     public void addFriendsList2(Person person) {
-        if(friendsList2 == null)
+        if (friendsList2 == null)
             friendsList2 = new LinkedList<>();
         friendsList2.add(person);
     }
 
     public void addFeed(Feed feed) {
-        if(feeds == null)
+        if (feeds == null)
             feeds = new LinkedList<>();
         feeds.add(feed);
     }

@@ -1,6 +1,5 @@
 package tft.GameBackend.controllers;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,15 +29,16 @@ public class FeedController {
     /**
      * GET - "/feed"
      * Получение постов
+     *
      * @param limit - количество постов на странице (по умолчанию 20)
-     * @param page - номер страницы (по умолчанию 0)
+     * @param page  - номер страницы (по умолчанию 0)
      * @return массив объектов {
-     *      *         "author": {
-     *      *             "id": id автора,
-     *      *             "name": имя автора
-     *      *         },
-     *      *         "body": тело поста
-     *      *     }
+     * *         "author": {
+     * *             "id": id автора,
+     * *             "name": имя автора
+     * *         },
+     * *         "body": тело поста
+     * *     }
      * @throws PersonNotFoundException
      */
     @GetMapping
@@ -51,13 +51,14 @@ public class FeedController {
     /**
      * GET - "/feed/{id}"
      * Получение поста по его id
+     *
      * @param id - id поста
      * @return Пост в формате {
-     *  "author": {
-     *      "id": id автора,
-     *      "name": имя автора
-     *   },
-     *  "body": тело поста
+     * "author": {
+     * "id": id автора,
+     * "name": имя автора
+     * },
+     * "body": тело поста
      * }
      * @throws FeedNotFoundException
      */
@@ -69,14 +70,15 @@ public class FeedController {
     /**
      * GET - "/feed/person/{id}"
      * Получение списка постов человека
+     *
      * @param personId - id человека, посты которого надо получить
      * @return массив объектов  {
-     *         "author": {
-     *             "id": id автора,
-     *             "name": имя автора
-     *         },
-     *         "body": тело поста
-     *     }
+     * "author": {
+     * "id": id автора,
+     * "name": имя автора
+     * },
+     * "body": тело поста
+     * }
      */
 
     @GetMapping("/person/{id}")
@@ -88,9 +90,10 @@ public class FeedController {
     /**
      * POST - "/feed/add"
      * Добавление нового поста
+     *
      * @param newFeedDTO - Объект поста вида {
-     *       "body": содержание поста
-     * }
+     *                   "body": содержание поста
+     *                   }
      * @return OK
      * @throws PersonNotFoundException
      */
@@ -105,10 +108,11 @@ public class FeedController {
     /**
      * PATCH - "/feed/edit/{id}"
      * Редактирование поста
+     *
      * @param newFeedDTO - Объект поста вида {
-     *  "body": содержание поста
-     * }
-     * @param feedId - id поста
+     *                   "body": содержание поста
+     *                   }
+     * @param feedId     - id поста
      * @return OK
      * @throws FeedNotFoundException
      */
@@ -116,7 +120,7 @@ public class FeedController {
     @PatchMapping("/edit/{id}")
     public HttpStatus editFeed(@RequestBody NewFeedDTO newFeedDTO, @PathVariable("id") long feedId) throws FeedNotFoundException {
         Person person = authenticatedPersonService.getAuthenticatedPerson();
-        if(person.getId() != feedService.getById(feedId).getAuthor().getId())
+        if (person.getId() != feedService.getById(feedId).getAuthor().getId())
             return HttpStatus.LOCKED;
         feedService.edit(feedId, newFeedDTO.getBody());
         return HttpStatus.OK;
@@ -125,6 +129,7 @@ public class FeedController {
     /**
      * DELETE - "/feed/delete/{id}"
      * Удаление поста
+     *
      * @param feedId - id поста
      * @return OK
      * @throws FeedNotFoundException
@@ -133,7 +138,7 @@ public class FeedController {
     @DeleteMapping("/delete/{id}")
     public HttpStatus deleteFeed(@PathVariable("id") long feedId) throws FeedNotFoundException {
         Person person = authenticatedPersonService.getAuthenticatedPerson();
-        if(person.getId() != feedService.getById(feedId).getAuthor().getId())
+        if (person.getId() != feedService.getById(feedId).getAuthor().getId())
             return HttpStatus.LOCKED;
         feedService.delete(feedId);
         return HttpStatus.OK;
