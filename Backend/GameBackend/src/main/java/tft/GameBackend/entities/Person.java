@@ -1,11 +1,12 @@
 package tft.GameBackend.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,72 +15,73 @@ import java.util.List;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    long id;
 
-    private String username;
+    String username;
 
-    private String email;
+    String email;
 
-    private String password;
+    String password;
 
-    private int bestScore;
+    int bestScore;
 
     private String url;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    Role role;
 
     @ManyToMany
     @JoinTable(name = "friend_request",
-            joinColumns = @JoinColumn(name = "person_from"),
-            inverseJoinColumns = @JoinColumn(name = "person_to"))
-    private List<Person> sentFriendsRequests;
+    joinColumns = @JoinColumn(name = "person_from"),
+    inverseJoinColumns = @JoinColumn(name = "person_to"))
+    List<Person> sentFriendsRequests;
 
     @ManyToMany(mappedBy = "sentFriendsRequests")
-    private List<Person> receivedFriendsRequests;
+    List<Person> receivedFriendsRequests;
 
     @ManyToMany
     @JoinTable(name = "friends",
-            joinColumns = @JoinColumn(name = "person1_id"),
-            inverseJoinColumns = @JoinColumn(name = "person2_id"))
-    private List<Person> friendsList1;
+    joinColumns = @JoinColumn(name = "person1_id"),
+    inverseJoinColumns = @JoinColumn(name = "person2_id"))
+    List<Person> friendsList1;
 
     @ManyToMany(mappedBy = "friendsList1")
-    private List<Person> friendsList2;
+    List<Person> friendsList2;
 
     @OneToMany(mappedBy = "author")
-    private List<Feed> feeds;
+    List<Feed> feeds;
 
     public void addSentFriendsRequests(Person person) {
-        if (sentFriendsRequests == null)
+        if(sentFriendsRequests == null)
             sentFriendsRequests = new LinkedList<>();
         sentFriendsRequests.add(person);
     }
 
     public void addReceivedFriendsRequests(Person person) {
-        if (receivedFriendsRequests == null)
+        if(receivedFriendsRequests == null)
             receivedFriendsRequests = new LinkedList<>();
         receivedFriendsRequests.add(person);
     }
 
     public void addFriendsList1(Person person) {
-        if (friendsList1 == null)
+        if(friendsList1 == null)
             friendsList1 = new LinkedList<>();
         friendsList1.add(person);
     }
 
     public void addFriendsList2(Person person) {
-        if (friendsList2 == null)
+        if(friendsList2 == null)
             friendsList2 = new LinkedList<>();
         friendsList2.add(person);
     }
 
     public void addFeed(Feed feed) {
-        if (feeds == null)
+        if(feeds == null)
             feeds = new LinkedList<>();
         feeds.add(feed);
     }

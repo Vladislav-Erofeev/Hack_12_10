@@ -1,0 +1,14 @@
+package tft.GameBackend.dto;
+
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
+
+@Data
+@NoArgsConstructor
+public class ScoreDTO {
+    int score;
+    Date date;
+}

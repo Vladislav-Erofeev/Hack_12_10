@@ -1,3 +1,7 @@
 databaseChangeLog:
   - include:
+      file: db/changelog/v1.0.4/add-table-score.sql
+  - include:
+      file: db/changelog/v1.0.4/add-column-date-to-score.sql
+  - include:
       file: db/changelog/v1.0.4/add-column-url-in-person.sql

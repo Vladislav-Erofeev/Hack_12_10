@@ -5,7 +5,6 @@ import {useParams} from "react-router-dom";
 import {selectUserById} from "../../redux/slices/users";
 import {selectAllFeeds} from "../../redux/slices/feeds";
 import FeedListComponent from "./FeedListComponent";
-import Cookies from "universal-cookie";
 
 
 const Profile = () => {

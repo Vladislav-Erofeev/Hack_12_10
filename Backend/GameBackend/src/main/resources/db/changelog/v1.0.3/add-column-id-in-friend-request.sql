@@ -10,3 +10,4 @@ create table friend_request(
      exp_date date not null
 )
 -- rollback drop table friend_request;
+
