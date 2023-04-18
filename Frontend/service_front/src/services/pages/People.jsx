@@ -1,21 +1,22 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import {/*fetchUsers,*/ selectAllUsers} from "../../redux/slices/users";
+import {fetchUsers, selectAllUsers} from "../../redux/slices/users";
 import {Button} from "reactstrap";
+import Cookies from "universal-cookie";
 
 const People = () => {
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
     const users = useSelector(selectAllUsers)
 
-    // const usersStatus = useSelector(state => state.users.status)
-
-    // useEffect(() => {
-    //     if (usersStatus === 'idle') {
-    //         dispatch(fetchUsers())
-    //     }
-    // }, [usersStatus, dispatch])
+    const usersStatus = useSelector(state => state.users.status)
+    const cookies = new Cookies();
+    useEffect(() => {
+        if (usersStatus === 'idle') {
+            dispatch(fetchUsers(cookies.get('token')))
+        }
+    }, [usersStatus, dispatch])
 
     const renderedUsers = users.map(user => (
         <div className="d-flex my-4 align-items-center" key={user.id}>
@@ -25,7 +26,7 @@ const People = () => {
                 </div>
             </Link>
             <div className="profile-info ms-5">
-                <Link className="text-decoration-none text-dark" to={`/profile/${user.id}`}><h2 className="m-0">{user.username}</h2></Link>
+                <Link className="text-decoration-none text-dark" to={`/profile/${user.id}`}><h2 className="m-0">{user.name}</h2></Link>
             </div>
             <Button className="my-btn ms-auto fs-5">удалить из друзей</Button>
         </div>
