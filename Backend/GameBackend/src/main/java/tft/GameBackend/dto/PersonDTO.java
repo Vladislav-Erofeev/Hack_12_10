@@ -17,4 +17,5 @@ public class PersonDTO {
     private String username;
     private String email;
     private int bestScore;
+    private String url;
 }

@@ -31,6 +31,8 @@ public class Person {
 
     private int bestScore;
 
+    private String url;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 

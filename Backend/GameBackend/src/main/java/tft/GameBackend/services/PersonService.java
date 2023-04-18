@@ -61,4 +61,9 @@ public class PersonService {
             throw  new PersonNotFoundException("person with id=" + id + " not found");
         return person.get();
     }
+
+    @Transactional
+    public void save(Person person) {
+        personRepository.save(person);
+    }
 }
