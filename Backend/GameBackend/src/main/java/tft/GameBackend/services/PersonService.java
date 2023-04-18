@@ -29,24 +29,24 @@ public class PersonService {
 
     public List<Person> getSentRequests(long id) throws PersonNotFoundException {
         Optional<Person> person = personRepository.findById(id);
-        if(person.isEmpty())
-            throw  new PersonNotFoundException("person with id=" + id + " not found");
+        if (person.isEmpty())
+            throw new PersonNotFoundException("person with id=" + id + " not found");
         Hibernate.initialize(person.get().getSentFriendsRequests());
         return person.get().getSentFriendsRequests();
     }
 
     public List<Person> getReceivedRequests(long id) throws PersonNotFoundException {
         Optional<Person> person = personRepository.findById(id);
-        if(person.isEmpty())
-            throw  new PersonNotFoundException("person with id=" + id + " not found");
+        if (person.isEmpty())
+            throw new PersonNotFoundException("person with id=" + id + " not found");
         Hibernate.initialize(person.get().getReceivedFriendsRequests());
         return person.get().getReceivedFriendsRequests();
     }
 
     public List<Person> getFriendsList(long id) throws PersonNotFoundException {
-        Optional<Person> optionalPerson= personRepository.findById(id);
-        if(optionalPerson.isEmpty())
-            throw  new PersonNotFoundException("person with id=" + id + " not found");
+        Optional<Person> optionalPerson = personRepository.findById(id);
+        if (optionalPerson.isEmpty())
+            throw new PersonNotFoundException("person with id=" + id + " not found");
         Person person = optionalPerson.get();
         List<Person> people = new LinkedList<>();
 
@@ -57,8 +57,9 @@ public class PersonService {
 
     public Person getById(long id) throws PersonNotFoundException {
         Optional<Person> person = personRepository.findById(id);
-        if(person.isEmpty())
-            throw  new PersonNotFoundException("person with id=" + id + " not found");
+        if (person.isEmpty())
+            throw new PersonNotFoundException("person with id=" + id + " not found");
         return person.get();
     }
+
 }
