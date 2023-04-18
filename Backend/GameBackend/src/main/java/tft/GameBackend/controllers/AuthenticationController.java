@@ -16,12 +16,37 @@ public class AuthenticationController {
 
   private final AuthenticationService service;
 
+  /**
+   *
+   * @param request - запрос вида {
+   *     "username": имя пользователя,
+   *     "email": маил пользователя,
+   *     "password": пароль пользователя,
+   *     "bestScore": рекорд пользователя (int)
+   * }
+   * @return JW token вида - {
+   *     "token": токен
+   * }
+   */
+
   @PostMapping("/registration")
   public AuthenticationResponse register(
       @RequestBody RegisterRequest request
   ) {
     return service.register(request);
   }
+
+  /**
+   *
+   * @param request - запрос вида {
+   *     "email": маил пользователя,
+   *     "password": пароль пользователя,
+   * }
+   * @return JW token вида - {
+   *     "token": токен
+   * }
+   */
+
   @PostMapping("/login")
   public AuthenticationResponse authenticate(
       @RequestBody AuthenticationRequest request

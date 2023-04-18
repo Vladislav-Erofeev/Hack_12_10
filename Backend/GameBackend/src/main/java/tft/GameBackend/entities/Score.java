@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -24,6 +25,7 @@ public class Score {
     Person person;
 
     @Temporal(TemporalType.DATE)
+   // @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
 }

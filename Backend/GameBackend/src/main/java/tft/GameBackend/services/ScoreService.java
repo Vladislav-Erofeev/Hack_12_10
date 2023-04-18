@@ -7,6 +7,8 @@ import tft.GameBackend.entities.Score;
 import tft.GameBackend.errors.PersonNotFoundException;
 import tft.GameBackend.reopsitories.ScoreRepository;
 
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,16 +28,16 @@ public class ScoreService {
         person.setBestScore(bestScore);
     }
 
-    public int findBestScoreById(long id) {
-        return scoreRepository.findByPersonId(id).stream()
-                .collect(Collectors.summarizingInt(Integer::intValue)).getMax();
-    }
-
     public void addScoreById(long id, int scoreToSet) throws PersonNotFoundException {
         Score score = new Score();
         score.setScore(scoreToSet);
         score.setPerson(personService.getById(id));
+        score.setDate(new Date());
         scoreRepository.save(score);
     }
 
+
+    public List<Score> findStatsByPersonId(long id) {
+        return scoreRepository.findByPersonId(id);
+    }
 }
