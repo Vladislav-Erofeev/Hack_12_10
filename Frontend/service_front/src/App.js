@@ -7,6 +7,8 @@ import NavBar from "./services/components/NavBar";
 import Footer from "./services/components/Footer";
 import People from "./services/pages/People";
 import Feed from "./services/pages/Feed";
+import Login from "./services/pages/Login";
+import Register from "./services/pages/Register";
 
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
                 <Route path="/profile/:userId" element={<Profile/>}/>
                 <Route path='/feeds' element={<FeedList/>}/>
                 <Route path='/feeds/:feedId' element={<Feed/>}/>
+                <Route path='/login' element={<Login/>}/>
+                <Route path='/registration' element={<Register/>}/>
             </Routes>
             <Footer/>
         </BrowserRouter>
