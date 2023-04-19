@@ -15,6 +15,7 @@ public interface PersonMapper {
     PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class);
 
     @Mapping(target = "url", source = "url")
+    @Mapping(target = "name", source = "username")
     PersonDTO personToPersonDTO(Person person);
 
     @Mapping(target = "name", source = "username")
