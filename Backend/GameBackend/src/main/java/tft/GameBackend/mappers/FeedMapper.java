@@ -6,7 +6,7 @@ import org.mapstruct.factory.Mappers;
 import tft.GameBackend.dto.FeedDTO;
 import tft.GameBackend.entities.Feed;
 
-@Mapper(uses = {PersonMapper.class})
+@Mapper(uses = {PersonMapper.class, FeedImageMapper.class})
 public interface FeedMapper {
     FeedMapper INSTANCE = Mappers.getMapper(FeedMapper.class);
 
