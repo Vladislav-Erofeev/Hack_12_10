@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 public class PersonDTO {
     private long id;
-    private String username;
+    private String name;
     private String email;
     private int bestScore;
     private String url;
