@@ -2,6 +2,8 @@ package tft.GameBackend.services;
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tft.GameBackend.entities.Person;
@@ -24,6 +26,11 @@ public class PersonService {
 
     public List<Person> findAll() {
         return personRepository.findAll();
+    }
+
+    public List<Person> findAll(String search, int limit, int page) {
+        return personRepository.findAllByUsernameContainingIgnoreCase(search,
+                PageRequest.of(page, limit, Sort.by("username")));
     }
 
     public List<Person> getSentRequests(long id) throws PersonNotFoundException {
