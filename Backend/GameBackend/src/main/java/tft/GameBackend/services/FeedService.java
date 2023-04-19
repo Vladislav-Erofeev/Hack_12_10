@@ -6,6 +6,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tft.GameBackend.entities.Feed;
+import tft.GameBackend.entities.FeedImage;
 import tft.GameBackend.entities.Person;
 import tft.GameBackend.errors.FeedNotFoundException;
 import tft.GameBackend.errors.PersonNotFoundException;
@@ -30,12 +31,17 @@ public class FeedService {
     }
 
     @Transactional
-    public void save(long personId, String body) throws PersonNotFoundException {
+    public long save(long personId, String body) throws PersonNotFoundException {
         Person person = personService.getById(personId);
         Feed feed = new Feed();
         feed.setAuthor(person);
         feed.setBody(body);
         person.addFeed(feed);
+        return feedRepository.save(feed).getId();
+    }
+
+    @Transactional
+    public void save(Feed feed) {
         feedRepository.save(feed);
     }
 

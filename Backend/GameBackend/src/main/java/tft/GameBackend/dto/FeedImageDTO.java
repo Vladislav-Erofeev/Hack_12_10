@@ -4,14 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
-public class FeedDTO {
+public class FeedImageDTO {
     private long id;
-    private String body;
-    private AuthorDTO author;
-    private List<FeedImageDTO> images;
+    private String url;
 }
