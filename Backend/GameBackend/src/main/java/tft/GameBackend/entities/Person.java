@@ -1,15 +1,12 @@
 package tft.GameBackend.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import tft.GameBackend.reopsitories.FeedRepository;
-
-import java.util.Collection;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,6 +29,8 @@ public class Person {
     String password;
 
     int bestScore;
+
+    private String url;
 
     @Enumerated(EnumType.STRING)
     Role role;

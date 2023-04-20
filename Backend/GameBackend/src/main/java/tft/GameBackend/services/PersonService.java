@@ -104,4 +104,9 @@ public class PersonService {
         return list.subList(0, Math.min(list.size(), 10));
     }
 
+    @Transactional
+    public void save(Person person) {
+        personRepository.save(person);
+    }
+
 }
