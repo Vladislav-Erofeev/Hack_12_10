@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
-import {useDispatch} from 'react-redux';
-import {auth} from "../../redux/security/authService";
+import React, {useEffect, useState} from 'react'
+import {useDispatch, useSelector} from 'react-redux';
 import {Button} from "reactstrap";
+import {useNavigate} from "react-router-dom";
+import {auth} from "../../redux/slices/security";
 
 const AdminLogin = () => {
 
@@ -9,9 +10,8 @@ const AdminLogin = () => {
         email: "",
         password: ""
     })
-
+    const navigate = useNavigate();
     const dispatch = useDispatch()
-
     return (
         <>
             <form>
@@ -25,6 +25,7 @@ const AdminLogin = () => {
                 <Button text="Войти" onClick={(event) => {
                     event.preventDefault()
                     dispatch(auth(admAuth, dispatch))
+                    navigate("/")
                 }}/>
             </form>
         </>

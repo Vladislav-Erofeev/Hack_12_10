@@ -11,7 +11,9 @@ const People = () => {
     const users = useSelector(selectAllUsers)
 
     const usersStatus = useSelector(state => state.users.status)
+
     const cookies = new Cookies();
+
     useEffect(() => {
         if (usersStatus === 'idle') {
             dispatch(fetchUsers(cookies.get('token')))
@@ -20,13 +22,15 @@ const People = () => {
 
     const renderedUsers = users.map(user => (
         <div className="d-flex my-4 align-items-center" key={user.id}>
-            <Link to={`/profile/${user.id}`}>
-                <div style={{width: "50px", height: "50px"}}>
+
+            <div style={{width: "50px", height: "50px"}}>
+                <Link to={`/user/${user.id}`}>
                     <img style={{width: "100%", height: "100%", borderRadius: "100%"}} src="mpi.jpg" alt=""/>
-                </div>
-            </Link>
+                </Link>
+            </div>
             <div className="profile-info ms-5">
-                <Link className="text-decoration-none text-dark" to={`/profile/${user.id}`}><h2 className="m-0">{user.name}</h2></Link>
+                <Link className="text-decoration-none text-dark" to={`/user/${user.id}`}><h2
+                    className="m-0">{user.name}</h2></Link>
             </div>
             <Button className="my-btn ms-auto fs-5">удалить из друзей</Button>
         </div>

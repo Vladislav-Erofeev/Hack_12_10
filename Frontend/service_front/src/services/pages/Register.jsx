@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import {reg} from "../../redux/security/authService";
 import {Button} from "reactstrap";
+import {reg} from "../../redux/slices/security";
 
 const AdminLogin = () => {
 

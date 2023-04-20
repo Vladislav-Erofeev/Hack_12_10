@@ -1,19 +1,17 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
 import {fetchFeeds, selectAllFeeds} from "../../redux/slices/feeds";
-import {Button} from "reactstrap";
-import FeedListComponent from "./FeedListComponent";
+import FeedListComponent from "../components/FeedListComponent";
 import Cookies from "universal-cookie";
 
 const FeedList = () => {
     const dispatch = useDispatch()
 
+    const cookies = new Cookies();
+
     const feeds = useSelector(selectAllFeeds)
 
     const feedsStatus = useSelector(state => state.feeds.status)
-
-    const cookies = new Cookies();
 
     useEffect(() => {
         if (feedsStatus === 'idle') {
@@ -21,6 +19,7 @@ const FeedList = () => {
         }
     }, [feedsStatus, dispatch])
 
+    console.log(feedsStatus)
 
     return (
         <div className="my-container">
@@ -28,6 +27,7 @@ const FeedList = () => {
             <FeedListComponent feeds={feeds}/>
         </div>
     )
+
 }
 
 export default FeedList

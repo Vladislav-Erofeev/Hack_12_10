@@ -1,17 +1,41 @@
-import "./Profile.css"
-import React from 'react'
-import {useSelector} from "react-redux";
+import React, {useEffect} from 'react'
+import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
-import {selectUserById} from "../../redux/slices/users";
-import {selectAllFeeds} from "../../redux/slices/feeds";
-import FeedListComponent from "./FeedListComponent";
+import FeedListComponent from "../components/FeedListComponent";
+import {fetchUser, fetchUserById, selectUser, selectUserStatus} from "../../redux/slices/user";
+import Cookies from "universal-cookie";
+import {fetchUserFeeds, selectUserFeeds, selectUserFeedsStatus} from "../../redux/slices/userFeeds";
+import axios from "axios";
 
 
 const Profile = () => {
     const {userId} = useParams();
 
-    const user = useSelector(state => selectUserById(state, userId))
-    const feeds = useSelector(selectAllFeeds)
+    const cookies = new Cookies();
+
+    const dispatch = useDispatch()
+
+    const user = useSelector(selectUser)
+    const feeds = useSelector(selectUserFeeds)
+
+    const userStatus = useSelector(selectUserStatus)
+    const feedsStatus = useSelector(selectUserFeedsStatus)
+
+        useEffect(() => {
+            if (feedsStatus === 'idle') {
+                dispatch(fetchUserFeeds({token:cookies.get('token'), userId: userId}))
+            }
+        }, [feedsStatus, dispatch])
+
+    useEffect(() => {
+        if (userStatus === 'idle') {
+            dispatch(fetchUserById({token:cookies.get('token'), userId: userId}))
+        }
+    }, [userStatus, dispatch])
+
+    console.log(feeds)
+    console.log(user)
+
 
     if (!user) {
         return (
@@ -20,8 +44,6 @@ const Profile = () => {
             </div>
         )
     }
-
-
 
     return (
         <div className="my-container">

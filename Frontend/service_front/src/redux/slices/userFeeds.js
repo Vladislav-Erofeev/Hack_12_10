@@ -1,10 +1,10 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchFeeds = createAsyncThunk("feed/fetchFeeds",
-    async (token) => {
-
-        const {data} = await axios.get("http://localhost:8080/feed",
+export const fetchUserFeeds = createAsyncThunk("profile/fetchUserFeeds",
+    async (info) => {
+        const {token, userId} = info;
+        const {data} = await axios.get(`http://localhost:8080/feed/person/${userId}`,
             {
                 headers: {
                     "access-control-allow-origin": "http://localhost:3000",
@@ -21,27 +21,29 @@ const initialState = {
     error: null
 }
 
-const feedsSlice = createSlice({
-    name: "feeds",
+const userFeedsSlice = createSlice({
+    name: "user_feeds",
     initialState,
     reducers: {},
     extraReducers(builder) {
         builder
-            .addCase(fetchFeeds.pending, (state, action) => {
+            .addCase(fetchUserFeeds.pending, (state, action) => {
                 state.status = 'loading'
+                console.log(state.status)
             })
-            .addCase(fetchFeeds.fulfilled, (state, action) => {
+            .addCase(fetchUserFeeds.fulfilled, (state, action) => {
                 state.status = 'succeeded'
                 state.feeds = state.feeds.concat(action.payload)
+
             })
-            .addCase(fetchFeeds.rejected, (state, action) => {
+            .addCase(fetchUserFeeds.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.error.message
             })
     }
 });
 
-export const selectAllFeeds = (state) => state.feeds.feeds
-export const selectFeedById = (state, feedId) =>
-    state.feeds.feeds.find(feed => feed.id === feedId)
-export const feedsReducer = feedsSlice.reducer
+
+export const selectUserFeeds = (state) => state.user_feeds.feeds
+export const selectUserFeedsStatus = (state) => state.user_feeds.status
+export const userFeedsReducer = userFeedsSlice.reducer

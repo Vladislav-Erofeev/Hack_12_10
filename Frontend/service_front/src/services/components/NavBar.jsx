@@ -39,7 +39,7 @@ function NavBar() {
                     </Nav>
                     <Nav style={{marginLeft: "auto"}} navbar>
                         <NavItem>
-                            <NavLink to="/profile/1" tag={Li}>Профиль</NavLink>
+                            <NavLink to="/profile" tag={Li}>Профиль</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink to="/game" tag={Li}>Играть</NavLink>

@@ -3,15 +3,14 @@ import axios from "axios";
 
 export const fetchUsers = createAsyncThunk("people/fetchUsers",
     async (token) => {
-        const {data} = await axios.get("http://localhost:8080/friends",
-
+        const {data} = await axios.get("http://localhost:8080/people",
             {
                 headers: {
-
                     "access-control-allow-origin": "http://localhost:3000",
                     "Authorization": `Bearer ${token}`,
                 }
             });
+        console.log(data)
         return data
     })
 
@@ -43,6 +42,4 @@ const usersSlice = createSlice({
 
 
 export const selectAllUsers = (state) => state.users.users
-export const selectUserById = (state, userId) =>
-    state.users.users.find(user => user.id === userId)
 export const usersReducer = usersSlice.reducer

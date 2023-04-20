@@ -1,7 +1,16 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 
-function FeedListComponent({feeds}) {
+const FeedListComponent = ({feeds}) => {
+
+    if (!feeds.length) {
+        return (
+            <div className="my-container text-center">
+                <h2>Здесь пока ничего нет!</h2>
+            </div>
+        )
+    }
+
     return (feeds.map(feed => (
         <div style={{border: "#604636 solid"}} className="m-3 p-3 border-4 rounded-3" key={feed.id}>
             <div className="d-flex mb-3 align-items-center">
