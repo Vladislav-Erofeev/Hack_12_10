@@ -124,6 +124,13 @@ public class FriendController {
         return HttpStatus.OK;
     }
 
+    @DeleteMapping("/delete/{id}")
+    public HttpStatus deleteFriend(@PathVariable("id") long id) {
+        Person person = authenticatedPersonService.getAuthenticatedPerson();
+        personService.deleteFriend(person.getId(), id);
+        return HttpStatus.OK;
+    }
+
     @ExceptionHandler
     public ResponseEntity<PersonErrorResponse> personNotFound(PersonNotFoundException e) {
         PersonErrorResponse response = new PersonErrorResponse(e.getMessage());
