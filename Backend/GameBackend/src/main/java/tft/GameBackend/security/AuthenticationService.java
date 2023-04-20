@@ -25,7 +25,6 @@ public class AuthenticationService {
         .bestScore(request.getBestScore())
         .build();
     user.setRole(Role.USER);
-    user.setBestScore(0);
 
     var savedUser = repository.save(user);
     var jwtToken = jwtService.generateToken(new PersonDetails(user));
