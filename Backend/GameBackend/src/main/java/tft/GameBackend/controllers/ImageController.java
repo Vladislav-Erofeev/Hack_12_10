@@ -43,7 +43,7 @@ public class ImageController {
         Person person = authenticatedPersonService.getAuthenticatedPerson();
         String fileName = imageNameService.generate(file.getContentType());
 
-        if (person.getUrl() == null) {
+        if (!(person.getUrl() == null)) {
             Files.delete(Path.of(UPLOAD_DIRECTORY + "/person/" + person.getUrl()));
         }
         Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY + "/person/", fileName);

@@ -3,6 +3,7 @@ package tft.GameBackend.entities;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import lombok.experimental.FieldDefaults;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,6 +13,7 @@ import java.util.Date;
 @Entity
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Getter
 public class Score {
 
     @Id
@@ -26,6 +28,6 @@ public class Score {
 
     @Temporal(TemporalType.DATE)
    // @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    private LocalDate date;
 
 }

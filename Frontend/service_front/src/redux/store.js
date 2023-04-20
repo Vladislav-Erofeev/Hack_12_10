@@ -1,12 +1,16 @@
 import {configureStore} from '@reduxjs/toolkit'
 import {usersReducer} from './slices/users'
-import {userReducer} from './slices/user'
-import {securityReducer} from "./slices/security";
+import {feedsReducer} from "./slices/feeds";
+import {authReducer} from "./slices/auth";
+import {fieldReducer} from "./slices/gameField";
+import {gameStatusReducer} from "./slices/gameStatus";
 
 export default configureStore({
     reducer: {
         users: usersReducer,
-        user: userReducer,
-        security: securityReducer
+        feeds: feedsReducer,
+        auth: authReducer,
+        field: fieldReducer,
+        game_status: gameStatusReducer
     }
 });

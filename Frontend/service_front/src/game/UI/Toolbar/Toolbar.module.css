@@ -1,0 +1,13 @@
+.toolbar {
+    background-color: #1b193c;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    z-index: 2;
+    padding: 30px;
+    grid-area: 1 / 1 / 3 / 2;
+    box-shadow: 0 0 10px 1px black;
+}

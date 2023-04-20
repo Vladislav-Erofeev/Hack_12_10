@@ -22,9 +22,9 @@ public class AuthenticationService {
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .bestScore(request.getBestScore())
                 .build();
         user.setRole(Role.USER);
+        user.setBestScore(0);
 
         var savedUser = repository.save(user);
         var jwtToken = jwtService.generateToken(new PersonDetails(user));
@@ -47,6 +47,7 @@ public class AuthenticationService {
                 .token(jwtToken)
                 .build();
     }
+
 
 
 }
