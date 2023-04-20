@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: game_db
+      POSTGRES_PASSWORD: password
+
+  backend:
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/game_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+    ports:
+      - 8080:8080
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8000:8080
