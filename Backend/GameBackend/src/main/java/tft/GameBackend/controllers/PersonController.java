@@ -1,10 +1,6 @@
 package tft.GameBackend.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +8,6 @@ import tft.GameBackend.dto.PersonDTO;
 import tft.GameBackend.dto.PersonItemDTO;
 import tft.GameBackend.entities.Person;
 import tft.GameBackend.errors.PersonErrorResponse;
-import tft.GameBackend.errors.PersonNotFoundException;
 import tft.GameBackend.errors.PersonNotFoundException;
 import tft.GameBackend.mappers.PersonMapper;
 import tft.GameBackend.services.PersonService;
@@ -36,7 +31,7 @@ public class PersonController {
     }
 
     /**
-     * GET - "/people"
+     * GET - "/person/all"
      * Получение списка людей
      * @param search - строка поиска
      * @param limit - количество людей на странице (20 по умолчанию)
@@ -47,7 +42,7 @@ public class PersonController {
      *     "url": имя фотографии
      * }
      */
-    @GetMapping("/people")
+    @GetMapping("/all")
     public List<PersonItemDTO> getPersonList(@RequestParam(value = "search", defaultValue = "") String search,
                                              @RequestParam(value = "limit", defaultValue = "20") int limit,
                                              @RequestParam(value = "page", defaultValue = "0") int page) {
@@ -70,7 +65,7 @@ public class PersonController {
      * }
      * @throws PersonNotFoundException
      */
-    @GetMapping("/person/{id}")
+    @GetMapping("/{id}")
     public PersonDTO getPersonById(@PathVariable("id") long id) throws PersonNotFoundException {
         return personMapper.personToPersonDTO(personService.getById(id));
     }
