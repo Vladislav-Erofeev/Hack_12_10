@@ -16,7 +16,6 @@ const Profile = () => {
 
     const [feeds, setFeeds] = useState([])
 
-
     useEffect(() => {
         axios.get(`http://localhost:8080/person/${userId}`,
             {
@@ -42,10 +41,6 @@ const Profile = () => {
             }
         );
     })
-
-    console.log(feeds)
-    console.log(user)
-
 
     if (!user) {
         return (

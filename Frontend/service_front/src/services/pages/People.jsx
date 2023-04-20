@@ -1,24 +1,29 @@
-import React, {useEffect} from 'react'
-import {useDispatch, useSelector} from "react-redux";
+import React, {useEffect, useState} from 'react'
 import {Link} from "react-router-dom";
-import {fetchUsers, selectAllUsers} from "../../redux/slices/users";
 import {Button} from "reactstrap";
 import Cookies from "universal-cookie";
+import axios from "axios";
 
 const People = () => {
-    const dispatch = useDispatch()
-
-    const users = useSelector(selectAllUsers)
-
-    const usersStatus = useSelector(state => state.users.status)
 
     const cookies = new Cookies();
 
+    const token = cookies.get('token')
+
+    const [users, setUsers] = useState([])
+
     useEffect(() => {
-        if (usersStatus === 'idle') {
-            dispatch(fetchUsers(cookies.get('token')))
-        }
-    }, [usersStatus, dispatch])
+        axios.get('http://localhost:8080/people',
+            {
+                headers: {
+                    "access-control-allow-origin": "http://localhost:3000",
+                    "Authorization": `Bearer ${token}`,
+                }
+            }).then(res => {
+                setUsers(res.data)
+            }
+        );
+    })
 
     const renderedUsers = users.map(user => (
         <div className="d-flex my-4 align-items-center" key={user.id}>
