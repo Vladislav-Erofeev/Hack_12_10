@@ -15,7 +15,7 @@ const PrivateRoute = () => {
         if (userStatus === 'idle' && token) {
             dispatch(fetchUser(token))
         }
-    }, [userStatus, dispatch])
+    }, [userStatus, dispatch, token])
 
     let content
 

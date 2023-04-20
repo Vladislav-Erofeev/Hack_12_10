@@ -14,7 +14,7 @@ function MainPage() {
         if (userStatus === 'idle' && token) {
             dispatch(fetchUser(token))
         }
-    }, [userStatus, dispatch])
+    }, [userStatus, token])
 
     return (
         <div className="my-container text-center">

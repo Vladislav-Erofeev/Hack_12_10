@@ -23,7 +23,7 @@ const People = () => {
                 setUsers(res.data)
             }
         );
-    })
+    }, [token])
 
     const renderedUsers = users.map(user => (
         <div className="d-flex my-4 align-items-center" key={user.id}>
@@ -37,7 +37,6 @@ const People = () => {
                 <Link className="text-decoration-none text-dark" to={`/user/${user.id}`}><h2
                     className="m-0">{user.name}</h2></Link>
             </div>
-            <Button className="my-btn ms-auto fs-5">удалить из друзей</Button>
         </div>
     ))
 

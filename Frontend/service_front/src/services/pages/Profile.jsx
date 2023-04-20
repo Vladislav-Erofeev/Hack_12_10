@@ -27,7 +27,7 @@ const Profile = () => {
                 setUser(res.data)
             }
         );
-    })
+    }, [token, userId])
 
     useEffect(() => {
         axios.get(`http://localhost:8080/feed/person/${userId}`,
@@ -40,7 +40,7 @@ const Profile = () => {
                 setFeeds(res.data)
             }
         );
-    })
+    }, [token, userId])
 
     if (!user) {
         return (

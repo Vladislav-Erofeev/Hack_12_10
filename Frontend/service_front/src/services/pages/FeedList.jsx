@@ -22,7 +22,7 @@ const FeedList = () => {
                 setFeeds(res.data)
             }
         );
-    })
+    }, [])
 
     return (
         <div className="my-container">
