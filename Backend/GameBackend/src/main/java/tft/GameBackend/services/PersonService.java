@@ -69,6 +69,17 @@ public class PersonService {
     }
 
     @Transactional
+    public void deleteFriend(long person1Id, long person2Id) {
+        Person person = personRepository.findById(person1Id).get();
+        Person person1 = personRepository.findById(person2Id).get();
+        person.getFriendsList1().remove(person1);
+        person.getFriendsList2().remove(person1);
+
+        person1.getFriendsList1().remove(person);
+        person1.getFriendsList2().remove(person);
+    }
+
+    @Transactional
     public void save(Person person) {
         personRepository.save(person);
     }

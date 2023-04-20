@@ -22,6 +22,7 @@ public interface PersonMapper {
     FriendDTO personToFriendDTO(Person person);
 
     @Mapping(target = "name", source = "username")
+    @Mapping(target = "url", source = "url")
     AuthorDTO personToAuthorDTO(Person person);
 
     @Mapping(target = "name", source = "username")
