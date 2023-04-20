@@ -9,20 +9,22 @@ import People from "./services/pages/People";
 import Feed from "./services/pages/Feed";
 import Login from "./services/pages/Login";
 import Register from "./services/pages/Register";
+import GameUI from './game/components/GameUI/GameUI';
 
 
 function App() {
     return (
         <BrowserRouter>
-            <NavBar/>
             <Routes>
-                <Route path='/' element={<MainPage/>}/>
-                <Route path='/people' element={<People/>}/>
-                <Route path="/profile/:userId" element={<Profile/>}/>
-                <Route path='/feeds' element={<FeedList/>}/>
-                <Route path='/feeds/:feedId' element={<Feed/>}/>
-                <Route path='/login' element={<Login/>}/>
-                <Route path='/registration' element={<Register/>}/>
+                
+                <Route path='/' element={<><NavBar/><MainPage/></>}/>
+                <Route path='/people' element={<><NavBar/><People/></>}/>
+                <Route path="/profile/:userId" element={<><NavBar/><Profile/></>}/>
+                <Route path='/feeds' element={<><NavBar/><FeedList/></>}/>
+                <Route path='/feeds/:feedId' element={<><NavBar/><Feed/></>}/>
+                <Route path='/login' element={<><NavBar/><Login/></>}/>
+                <Route path='/registration' element={<><NavBar/><Register/></>}/>
+                <Route path='/game' element={<GameUI/>}/>
             </Routes>
             <Footer/>
         </BrowserRouter>
