@@ -1,7 +1,24 @@
-import "./MainPage.css"
 import {Link} from "react-router-dom";
+import Cookies from "universal-cookie";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchUser, selectUserStatus} from "../../redux/slices/user";
+import {useEffect} from "react";
 
 function MainPage() {
+    const dispatch = useDispatch()
+
+    const cookies = new Cookies()
+
+    const token = cookies.get('token')
+
+    const userStatus = useSelector(selectUserStatus)
+
+    useEffect(() => {
+        if (userStatus === 'idle' && token) {
+            dispatch(fetchUser(token))
+        }
+    }, [userStatus, token])
+
     return (
         <div className="my-container text-center">
             <h1 className="p-0 mt-4 mb-1">Играй в 12/10.</h1>

@@ -4,7 +4,7 @@ import {Button} from "reactstrap";
 import Cookies from "universal-cookie";
 import axios from "axios";
 
-const People = () => {
+const Friends = () => {
 
     const cookies = new Cookies();
 
@@ -13,7 +13,7 @@ const People = () => {
     const [users, setUsers] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:8080/person/all',
+        axios.get('http://localhost:8080/friends',
             {
                 headers: {
                     "access-control-allow-origin": "http://localhost:3000",
@@ -25,19 +25,8 @@ const People = () => {
         );
     }, [token])
 
-    const sendFriendRequest = (userId) => {
-        console.log(userId)
-        console.log(token)
-        axios.post(`http://localhost:8080/friends/send_request/${userId}`, {},
-            {
-                headers: {
-                    "access-control-allow-origin": "http://localhost:3000",
-                    "Authorization": `Bearer ${token}`,
-                }
-            }
-        ).catch(error => {
-            console.error('There was an error!', error);
-        });
+    const deleteFriend = (friendId) => {
+
     }
 
     const renderedUsers = users.map(user => (
@@ -50,13 +39,12 @@ const People = () => {
                            src={`http://localhost:8080/image${user.url}`} alt=""/>
                 }
             </Link>
-            <Link className=" profile-info ms-5 text-decoration-none text-dark" to={`/user/${user.id}`}>
+            <Link className="profile-info ms-5 text-decoration-none text-dark" to={`/user/${user.id}`}>
                 <h2 className="m-0">{user.name}</h2>
             </Link>
-            <Button className="my-btn ms-auto fs-5" onClick={event => {
+            <Button className="my-btn ms-auto fs-5" onClick={(event) => {
                 event.preventDefault()
-                sendFriendRequest(user.id)
-            }}>отправить запрос дружбы</Button>
+            }}>удалить из друзей</Button>
         </div>
     ))
 
@@ -68,4 +56,4 @@ const People = () => {
     )
 }
 
-export default People
+export default Friends
