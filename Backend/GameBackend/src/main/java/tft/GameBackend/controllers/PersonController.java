@@ -95,7 +95,8 @@ public class PersonController {
 
     @GetMapping("/getTopTen")
     public List<PersonDTO> getTopTen() {
-        return personService.getTopTen().stream().map(personMapper::personToPersonDTO).collect(Collectors.toList());
+        return personService.getTopTen().stream()
+                .map(personMapper::personToPersonDTO).collect(Collectors.toList());
     }
 
 }

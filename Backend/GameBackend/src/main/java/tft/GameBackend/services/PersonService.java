@@ -92,7 +92,7 @@ public class PersonService {
         return session.createQuery(studentCriteriaQuery).getResultList();
     }
 
-    public int getPersonsRatingPosition(int id) throws PersonNotFoundException {
+    public int getPersonsRatingPosition(int id) {
         for (int i = 0; i < sortPeopleByBestScoreFromHigher().size(); i++) {
             if (sortPeopleByBestScoreFromHigher().get(i).getId() == id) return i+1;
         }
