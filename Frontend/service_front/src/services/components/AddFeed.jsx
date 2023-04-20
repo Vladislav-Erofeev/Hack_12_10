@@ -1,8 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux';
+import React, {useState} from 'react'
 import {Button} from "reactstrap";
-import {useNavigate} from "react-router-dom";
-import {auth} from "../../redux/slices/security";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
@@ -14,7 +11,6 @@ const AdminLogin = () => {
     const [feed, setFeed] = useState({
         body: ""
     })
-
 
     const addFeed = async () => {
         let response = await axios.post(`http://localhost:8080/feed/add`, feed,
@@ -42,7 +38,6 @@ const AdminLogin = () => {
                 console.error('There was an error!', error);
             });
         }
-
     }
 
     return (

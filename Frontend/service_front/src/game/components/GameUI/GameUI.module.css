@@ -4,13 +4,7 @@
          url('../../Fonts/pixeleum-48.ttf') format('truetype')
   }
 
-body {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    overflow: hidden;
-}
+
 
 .UI {
     display: grid;

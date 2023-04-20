@@ -54,7 +54,10 @@ const Profile = () => {
         <div className="my-container">
             <div className="d-flex my-4">
                 <div className="profile-avatar">
-                    <img style={{width: "100%", height: "100%", borderRadius: "100%"}} src={`http://localhost:8080/person/`} alt=""/>
+                    {user.url === null
+                        ?<img style={{width: "100%", height: "100%", borderRadius: "100%"}} src="https://i.stack.imgur.com/U9zFC.png?s=192&g=1" alt=""/>
+                        :<img style={{width: "100%", height: "100%", borderRadius: "100%"}} src={`http://localhost:8080/image${user.url}`} alt=""/>
+                    }
                 </div>
                 <div className="profile-info ms-5">
                     <h1 className="mb-3">{user.name}</h1>

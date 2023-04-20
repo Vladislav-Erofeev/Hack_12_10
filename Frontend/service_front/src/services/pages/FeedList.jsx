@@ -30,7 +30,6 @@ const FeedList = () => {
             <FeedListComponent feeds={feeds}/>
         </div>
     )
-
 }
 
 export default FeedList

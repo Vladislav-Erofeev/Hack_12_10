@@ -1,24 +1,28 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import React, {useEffect, useState} from 'react'
+import {useDispatch} from 'react-redux';
 import {Button} from "reactstrap";
 import {reg} from "../../redux/slices/security";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import {fetchUser} from "../../redux/slices/user";
+import jwt from "jwt-decode";
 
 const AdminLogin = () => {
-
     const cookies = new Cookies();
-    const token = cookies.get('token')
 
     const [admReg, setAdmReg] = useState({
         email: "",
         password: ""
     })
+
     const [file, setFile] = useState(null)
+
     const dispatch = useDispatch()
 
     const register = async () => {
         dispatch(reg(admReg, dispatch))
+        const token = cookies.get('token')
+        console.log(jwt(token))
         if (file) {
             console.log(file)
             const formData = new FormData();
@@ -35,7 +39,6 @@ const AdminLogin = () => {
                 console.error('There was an error!', error);
             });
         }
-
     }
 
     return (
@@ -51,7 +54,7 @@ const AdminLogin = () => {
                 <input type="file" required onChange={(event) => {
                     setFile(event.target.files[0])
                 }}/>
-                <Button text = "Войти" onClick={(event) => {
+                <Button text="Войти" onClick={(event) => {
                     event.preventDefault()
                     register()
                 }}/>

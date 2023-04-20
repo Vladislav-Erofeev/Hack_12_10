@@ -11,24 +11,25 @@ const FeedListComponent = ({feeds}) => {
         )
     }
 
-
-
     return (feeds.map(feed => (
         <div style={{border: "#604636 solid"}} className="m-3 p-3 border-4 rounded-3" key={feed.id}>
             <div className="d-flex mb-3 align-items-center">
-                <Link to={`/profile/${feed.author.id}`}>
-                    <div style={{width: "50px", height: "50px"}}>
-                        <img style={{width: "100%", height: "100%", borderRadius: "100%"}} src={`http://localhost:8080/image${feed.author.url}`} alt=""/>
-                    </div>
+                <Link style={{width: "50px", height: "50px"}} to={`/user/${feed.author.id}`}>
+                    {feed.author.url === null
+                        ? <img style={{width: "100%", height: "100%", borderRadius: "100%"}}
+                               src="https://i.stack.imgur.com/U9zFC.png?s=192&g=1" alt=""/>
+                        : <img style={{width: "100%", height: "100%", borderRadius: "100%"}}
+                               src={`http://localhost:8080/image${feed.author.url}`} alt=""/>
+                    }
                 </Link>
-                <div className="profile-info ms-4">
-                    <Link className="text-decoration-none text-dark" to={`/profile/${feed.author.id}`}><h2
-                        className="m-0">{feed.author.name}</h2></Link>
-                </div>
+                <Link className="text-decoration-none text-dark profile-info ms-4" to={`/user/${feed.author.id}`}>
+                    <h2>{feed.author.name}</h2>
+                </Link>
             </div>
             <div>
                 <p>{feed.body}</p>
-                <Link to={`/feeds/${feed.id}`}><img src={`http://localhost:8080/image${feed.images[0].url}`} width="100%" alt=""/></Link>
+                <Link to={`/feeds/${feed.id}`}><img src={`http://localhost:8080/image${feed.images[0].url}`}
+                                                    width="100%" alt=""/></Link>
             </div>
         </div>
     )))

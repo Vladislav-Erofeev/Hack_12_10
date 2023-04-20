@@ -1,15 +1,18 @@
 import {Link} from "react-router-dom";
 import Cookies from "universal-cookie";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchUser, selectUser, selectUserStatus} from "../../redux/slices/user";
+import {fetchUser, selectUserStatus} from "../../redux/slices/user";
 import {useEffect} from "react";
-import {getToken} from "../../redux/slices/security";
 
 function MainPage() {
     const dispatch = useDispatch()
+
     const cookies = new Cookies()
+
     const token = cookies.get('token')
+
     const userStatus = useSelector(selectUserStatus)
+
     useEffect(() => {
         if (userStatus === 'idle' && token) {
             dispatch(fetchUser(token))
