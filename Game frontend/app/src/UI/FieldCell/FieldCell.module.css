@@ -1,9 +1,0 @@
-.cell {
-    background-color: aliceblue;
-    width: 38px;
-    height: 38px;
-    border: 1px solid silver;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
