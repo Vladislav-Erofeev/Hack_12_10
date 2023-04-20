@@ -49,7 +49,7 @@ public class ImageController {
         Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY + "/person/", fileName);
         Files.write(fileNameAndPath, file.getBytes());
 
-        person.setUrl(fileName);
+        person.setUrl("/person/" + fileName);
         personService.save(person);
     }
 
@@ -72,7 +72,7 @@ public class ImageController {
 
         FeedImage feedImage = new FeedImage();
         feedImage.setFeed(feed);
-        feedImage.setUrl(fileName);
+        feedImage.setUrl("/feed/" + fileName);
 
         feed.addFeedImage(feedImage);
         feedService.save(feed);

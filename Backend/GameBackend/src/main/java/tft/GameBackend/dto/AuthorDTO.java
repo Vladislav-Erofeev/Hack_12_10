@@ -9,5 +9,6 @@ import lombok.Setter;
 @Setter
 public class AuthorDTO {
     private Long id;
+    private String url;
     private String name;
 }
