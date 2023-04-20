@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tft.GameBackend.dto.FriendDTO;
 import tft.GameBackend.entities.Person;
+import tft.GameBackend.errors.FriendRequestErrorResponse;
+import tft.GameBackend.errors.NotUniqueFriendRequest;
 import tft.GameBackend.errors.PersonErrorResponse;
 import tft.GameBackend.errors.PersonNotFoundException;
 import tft.GameBackend.mappers.PersonMapper;
@@ -86,7 +88,7 @@ public class FriendController {
      * @return OK
      */
     @PostMapping("/send_request/{id}")
-    public HttpStatus sendFriendRequest(@PathVariable("id") int personTo) {
+    public HttpStatus sendFriendRequest(@PathVariable("id") int personTo) throws NotUniqueFriendRequest {
         Person person = authenticatedPersonService.getAuthenticatedPerson();
         friendService.sendRequest(person.getId(), personTo);
         return HttpStatus.OK;
@@ -126,5 +128,11 @@ public class FriendController {
     public ResponseEntity<PersonErrorResponse> personNotFound(PersonNotFoundException e) {
         PersonErrorResponse response = new PersonErrorResponse(e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<FriendRequestErrorResponse> notUniqueFriendRequest(NotUniqueFriendRequest e) {
+        FriendRequestErrorResponse response = new FriendRequestErrorResponse(e.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }
