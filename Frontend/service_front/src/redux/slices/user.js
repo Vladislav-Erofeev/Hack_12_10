@@ -14,19 +14,6 @@ export const fetchUser = createAsyncThunk("profile/fetchUser",
         return response.data
     })
 
-export const fetchUserById = createAsyncThunk("profile/fetchUserById",
-    async (info) => {
-    const {token, userId} = info;
-        const {data} = await axios.get(`http://localhost:8080/person/${userId}`,
-            {
-                headers: {
-                    "access-control-allow-origin": "http://localhost:3000",
-                    "Authorization": `Bearer ${token}`,
-                }
-            });
-        return data
-    })
-
 const initialState = {
     user: null,
     status: 'idle',
@@ -47,17 +34,6 @@ const userSlice = createSlice({
                 state.user = action.payload
             })
             .addCase(fetchUser.rejected, (state, action) => {
-                state.status = 'failed'
-                state.error = action.error.message
-            })
-            .addCase(fetchUserById.pending, (state, action) => {
-                state.status = 'loading'
-            })
-            .addCase(fetchUserById.fulfilled, (state, action) => {
-                state.status = 'succeeded'
-                state.user = action.payload
-            })
-            .addCase(fetchUserById.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.error.message
             })

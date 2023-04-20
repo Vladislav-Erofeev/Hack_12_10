@@ -1,10 +1,7 @@
-import React, {useEffect} from 'react'
-import {useDispatch, useSelector} from "react-redux";
+import React, {useEffect, useState} from 'react'
 import {useParams} from "react-router-dom";
 import FeedListComponent from "../components/FeedListComponent";
-import {fetchUser, fetchUserById, selectUser, selectUserStatus} from "../../redux/slices/user";
 import Cookies from "universal-cookie";
-import {fetchUserFeeds, selectUserFeeds, selectUserFeedsStatus} from "../../redux/slices/userFeeds";
 import axios from "axios";
 
 
@@ -13,25 +10,38 @@ const Profile = () => {
 
     const cookies = new Cookies();
 
-    const dispatch = useDispatch()
+    const token = cookies.get('token')
 
-    const user = useSelector(selectUser)
-    const feeds = useSelector(selectUserFeeds)
+    const [user, setUser] = useState(null)
 
-    const userStatus = useSelector(selectUserStatus)
-    const feedsStatus = useSelector(selectUserFeedsStatus)
+    const [feeds, setFeeds] = useState([])
 
-        useEffect(() => {
-            if (feedsStatus === 'idle') {
-                dispatch(fetchUserFeeds({token:cookies.get('token'), userId: userId}))
-            }
-        }, [feedsStatus, dispatch])
 
     useEffect(() => {
-        if (userStatus === 'idle') {
-            dispatch(fetchUserById({token:cookies.get('token'), userId: userId}))
-        }
-    }, [userStatus, dispatch])
+        axios.get(`http://localhost:8080/person/${userId}`,
+            {
+                headers: {
+                    "access-control-allow-origin": "http://localhost:3000",
+                    "Authorization": `Bearer ${token}`,
+                }
+            }).then(res => {
+                setUser(res.data)
+            }
+        );
+    })
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/feed/person/${userId}`,
+            {
+                headers: {
+                    "access-control-allow-origin": "http://localhost:3000",
+                    "Authorization": `Bearer ${token}`,
+                }
+            }).then(res => {
+                setFeeds(res.data)
+            }
+        );
+    })
 
     console.log(feeds)
     console.log(user)
@@ -52,7 +62,7 @@ const Profile = () => {
                     <img style={{width: "100%", height: "100%", borderRadius: "100%"}} src="mpi.jpg" alt=""/>
                 </div>
                 <div className="profile-info ms-5">
-                    <h1 className="mb-3">{user.username}</h1>
+                    <h1 className="mb-3">{user.name}</h1>
                     <h3 className="m-0">Лучший результат {user.bestScore}</h3>
                 </div>
             </div>
