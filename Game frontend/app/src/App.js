@@ -6,7 +6,6 @@ function App() {
   return (
     <BrowserRouter className="App">
       <Routes>
-        <Route path='/game' element={<GameUI/>}/>
 
       </Routes>
     </BrowserRouter>
