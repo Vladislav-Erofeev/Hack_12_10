@@ -2,6 +2,7 @@ package tft.GameBackend.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tft.GameBackend.dto.FeedDTO;
 import tft.GameBackend.dto.NewFeedDTO;
@@ -37,7 +38,13 @@ public class FeedController {
      * *             "id": id автора,
      * *             "name": имя автора
      * *         },
-     * *         "body": тело поста
+     * *         "body": тело поста,
+     * "images": [
+     * {
+     * "id": id фотографии
+     * "url": имя файла
+     * } ...
+     * ]
      * *     }
      * @throws PersonNotFoundException
      */
@@ -53,13 +60,19 @@ public class FeedController {
      * Получение поста по его id
      *
      * @param id - id поста
-     * @return Пост в формате {
-     * "author": {
-     * "id": id автора,
-     * "name": имя автора
-     * },
-     * "body": тело поста
-     * }
+     * @return объект {
+     * *         "author": {
+     * *             "id": id автора,
+     * *             "name": имя автора
+     * *         },
+     * *         "body": тело поста,
+     * "images": [
+     * {
+     * "id": id фотографии
+     * "url": имя файла
+     * } ...
+     * ]
+     * *     }
      * @throws FeedNotFoundException
      */
     @GetMapping("/{id}")
@@ -72,13 +85,19 @@ public class FeedController {
      * Получение списка постов человека
      *
      * @param personId - id человека, посты которого надо получить
-     * @return массив объектов  {
-     * "author": {
-     * "id": id автора,
-     * "name": имя автора
-     * },
-     * "body": тело поста
-     * }
+     * @return массив объектов {
+     * *         "author": {
+     * *             "id": id автора,
+     * *             "name": имя автора
+     * *         },
+     * *         "body": тело поста,
+     * "images": [
+     * {
+     * "id": id фотографии
+     * "url": имя файла
+     * } ...
+     * ]
+     * *     }
      */
 
     @GetMapping("/person/{id}")
@@ -94,15 +113,15 @@ public class FeedController {
      * @param newFeedDTO - Объект поста вида {
      *                   "body": содержание поста
      *                   }
-     * @return OK
+     * @return id - id создаваемого поста
      * @throws PersonNotFoundException
      */
 
     @PostMapping("/add")
-    public HttpStatus add(@RequestBody NewFeedDTO newFeedDTO) throws PersonNotFoundException {
+    public ResponseEntity<Long> add(@RequestBody NewFeedDTO newFeedDTO) throws PersonNotFoundException {
         Person person = authenticatedPersonService.getAuthenticatedPerson();
-        feedService.save(person.getId(), newFeedDTO.getBody());
-        return HttpStatus.OK;
+        long id = feedService.save(person.getId(), newFeedDTO.getBody());
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
     /**

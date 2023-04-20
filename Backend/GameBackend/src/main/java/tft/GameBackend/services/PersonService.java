@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tft.GameBackend.dto.PersonDTO;
@@ -33,6 +35,11 @@ public class PersonService {
 
     public List<Person> findAll() {
         return personRepository.findAll();
+    }
+
+    public List<Person> findAll(String search, int limit, int page) {
+        return personRepository.findAllByUsernameContainingIgnoreCase(search,
+                PageRequest.of(page, limit, Sort.by("username")));
     }
 
     public List<Person> getSentRequests(long id) throws PersonNotFoundException {
@@ -102,6 +109,17 @@ public class PersonService {
     public List<Person> getTopTen() {
         List<Person> list = sortPeopleByBestScoreFromHigher();
         return list.subList(0, Math.min(list.size(), 10));
+    }
+
+    @Transactional
+    public void deleteFriend(long person1Id, long person2Id) {
+        Person person = personRepository.findById(person1Id).get();
+        Person person1 = personRepository.findById(person2Id).get();
+        person.getFriendsList1().remove(person1);
+        person.getFriendsList2().remove(person1);
+
+        person1.getFriendsList1().remove(person);
+        person1.getFriendsList2().remove(person);
     }
 
     @Transactional
