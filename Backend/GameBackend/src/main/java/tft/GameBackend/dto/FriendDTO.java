@@ -11,4 +11,5 @@ public class FriendDTO {
     private Long id;
     private String name;
     private String email;
+    private String url;
 }
