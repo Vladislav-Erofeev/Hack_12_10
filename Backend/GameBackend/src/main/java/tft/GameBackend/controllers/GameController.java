@@ -25,10 +25,29 @@ public class GameController {
     private final ImageNameService imageNameService;
     private final String UPLOAD_DIRECTORY = "C:/images/";
 
-    @GetMapping("/level/{id}")
+    /**
+     * GET - "/level/{id}"
+     * Получение уровня по его id
+     * @param levelId - id уровня
+     * @return объект {
+     *     "field": двумерный массив int 30 на 30,
+     *     "url": адрес фотографии
+     * }
+     * @throws LevelNotFoundException
+     */
+    @GetMapping("/{id}")
     public LevelDTO getLevelArray(@PathVariable("id") int levelId) throws LevelNotFoundException {
         return levelService.findById(levelId);
     }
+
+    /**
+     * POST - "/level/add"
+     * Добавление нового уровня
+     * @param newLevelDTO - двумерный массив 30 на 30 типа int
+     * @param file - фотография
+     * @return OK
+     * @throws IOException
+     */
 
     @PostMapping("/add")
     public HttpStatus addLevel(@RequestPart("field")NewLevelDTO newLevelDTO, @RequestPart MultipartFile file) throws IOException {
@@ -41,6 +60,13 @@ public class GameController {
         levelService.save(levelDTO);
         return HttpStatus.OK;
     }
+
+    /**
+     * DELETE - "/level/dele/{id}"
+     * Удаление поста по его id
+     * @param id - id поста
+     * @return
+     */
 
     @DeleteMapping("/delete/{id}")
     public HttpStatus deleteLevel(@PathVariable("id") long id) {
