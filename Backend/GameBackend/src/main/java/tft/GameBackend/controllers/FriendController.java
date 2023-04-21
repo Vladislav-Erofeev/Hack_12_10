@@ -124,6 +124,12 @@ public class FriendController {
         return HttpStatus.OK;
     }
 
+    /**
+     * GET - "/friends/delete/{id}"
+     * Удаление человека из списка друзей
+     * @param id - id пользователя, которого надо удалить
+     * @return
+     */
     @DeleteMapping("/delete/{id}")
     public HttpStatus deleteFriend(@PathVariable("id") long id) {
         Person person = authenticatedPersonService.getAuthenticatedPerson();
