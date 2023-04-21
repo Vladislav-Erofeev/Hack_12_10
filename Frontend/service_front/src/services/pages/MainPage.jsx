@@ -5,19 +5,6 @@ import {fetchUser, selectUserStatus} from "../../redux/slices/user";
 import {useEffect} from "react";
 
 function MainPage() {
-    const dispatch = useDispatch()
-
-    const cookies = new Cookies()
-
-    const token = cookies.get('token')
-
-    const userStatus = useSelector(selectUserStatus)
-
-    useEffect(() => {
-        if (userStatus === 'idle' && token) {
-            dispatch(fetchUser(token))
-        }
-    }, [userStatus, token])
 
     return (
         <div className="my-container text-center">

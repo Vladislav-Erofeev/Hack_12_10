@@ -12,15 +12,34 @@ import Register from "./services/pages/Register";
 import PrivateRoute from "./services/pages/PrivateRoute";
 import AddFeed from "./services/components/AddFeed";
 import GameUI from './game/components/GameUI/GameUI';
+import Friends from "./services/pages/Friends";
+import {useDispatch} from "react-redux";
+import Cookies from "universal-cookie";
+import {fetchUser} from "./redux/slices/user";
+import {useEffect} from "react";
+import * as PropTypes from "prop-types";
 
+
+
+Routes.propTypes = {children: PropTypes.node};
 
 function App() {
+    const dispatch = useDispatch()
+
+    const cookies = new Cookies()
+
+    const token = cookies.get('token')
+
+    useEffect(() => {
+        dispatch(fetchUser(token))
+    }, [])
     return (
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<><NavBar/><MainPage/></>}/>
 
                 <Route path='/people' element={<><NavBar/><People/></>}/>
+                <Route path='/friends' element={<><NavBar/><Friends/></>}/>
                 <Route path="/profile" element={<PrivateRoute/>}/>
                 <Route path="/user/:userId" element={<><NavBar/><Profile/></>}/>
 
