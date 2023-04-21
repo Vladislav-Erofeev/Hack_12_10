@@ -1,26 +1,28 @@
-import React, {useEffect} from 'react'
-import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
-import {fetchFeeds, selectAllFeeds} from "../../redux/slices/feeds";
-import {Button} from "reactstrap";
-import FeedListComponent from "./FeedListComponent";
+import React, {useEffect, useState} from 'react'
+import FeedListComponent from "../components/FeedListComponent";
 import Cookies from "universal-cookie";
+import axios from "axios";
 
 const FeedList = () => {
-    const dispatch = useDispatch()
-
-    const feeds = useSelector(selectAllFeeds)
-
-    const feedsStatus = useSelector(state => state.feeds.status)
 
     const cookies = new Cookies();
 
-    useEffect(() => {
-        if (feedsStatus === 'idle') {
-            dispatch(fetchFeeds(cookies.get('token')))
-        }
-    }, [feedsStatus, dispatch])
+    const token = cookies.get('token')
 
+    const [feeds, setFeeds] = useState([])
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/feed',
+            {
+                headers: {
+                    "access-control-allow-origin": "http://localhost:3000",
+                    "Authorization": `Bearer ${token}`,
+                }
+            }).then(res => {
+                setFeeds(res.data)
+            }
+        );
+    }, [])
 
     return (
         <div className="my-container">

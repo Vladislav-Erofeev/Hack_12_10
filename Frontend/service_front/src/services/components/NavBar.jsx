@@ -34,12 +34,15 @@ function NavBar() {
                             <NavLink to="/people" tag={Li}>Люди</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink to="/chat" tag={Li}>Чат</NavLink>
+                            <NavLink to="/friends" tag={Li}>Друзья</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink to="/rating" tag={Li}>Рейтинг</NavLink>
                         </NavItem>
                     </Nav>
                     <Nav style={{marginLeft: "auto"}} navbar>
                         <NavItem>
-                            <NavLink to="/profile/1" tag={Li}>Профиль</NavLink>
+                            <NavLink to="/profile" tag={Li}>Профиль</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink to="/game" tag={Li}>Играть</NavLink>

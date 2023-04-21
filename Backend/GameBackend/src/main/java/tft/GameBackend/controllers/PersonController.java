@@ -77,7 +77,7 @@ public class PersonController {
     }
 
     /**
-     * GET - "/person/sortPeopleByBestScore"
+     * GET - "/person/sortPeopleByBestScoreFromLess"
      * Получение списка людей отсортированного по рекорду по возрастанию
      *
      * @return List<PersonDTO> - список людей отсортированный по рекорду вида
@@ -96,7 +96,7 @@ public class PersonController {
     }
 
     /**
-     * GET - "/person/sortPeopleByBestScore"
+     * GET - "/person/sortPeopleByBestScoreFromHigher"
      * Получение списка людей отсортированного по рекорду по убыванию
      *
      * @return List<PersonDTO> - список людей отсортированный по рекорду вида
