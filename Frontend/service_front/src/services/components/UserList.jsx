@@ -5,7 +5,7 @@ import Cookies from "universal-cookie";
 import axios from "axios";
 import Person from "./Person";
 
-const People = ({nameList, nameAction, getUsers, actionToUser}) => {
+const People = ({nameAction1, nameAction2, getUsers, actionToUser1, actionToUser2}) => {
 
     const cookies = new Cookies();
 
@@ -17,24 +17,32 @@ const People = ({nameList, nameAction, getUsers, actionToUser}) => {
         getUsers(token).then(res => {
             setUsers(res)
         })
-    }, [])
+    }, [getUsers])
 
 
     return (
         <div className="my-container">
-            <h1 className="my-3">{nameList}</h1>
             {users
                 ?
                 users.map(user => (
                     <div className="d-flex my-4 align-items-center" key={user.id}>
                         <Person user={user}/>
-                        {nameAction !== undefined
-                            ? <Button className="my-btn ms-auto fs-5" onClick={event => {
-                                event.preventDefault()
-                                actionToUser(token, user.id)
-                            }}>{nameAction}</Button>
-                            : <></>
-                        }
+                        <div className="d-flex justify-content-around flex-column ms-auto" style={{height:"100px"}}>
+                            {actionToUser1 !== undefined
+                                ? <Button className="fs-5" color="success" onClick={event => {
+                                    event.preventDefault()
+                                    actionToUser1(token, user.id)
+                                }}>{nameAction1}</Button>
+                                : <></>
+                            }
+                            {actionToUser2 !== undefined
+                                ? <Button className=" fs-5" color="danger" onClick={event => {
+                                    event.preventDefault()
+                                    actionToUser2(token, user.id)
+                                }}>{nameAction2}</Button>
+                                : <></>
+                            }
+                        </div>
                     </div>
                 ))
                 :
