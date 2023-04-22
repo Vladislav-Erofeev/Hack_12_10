@@ -2,20 +2,16 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import Cookies from 'universal-cookie'
 import axios from "axios";
 import jwt from "jwt-decode";
-import {fetchUser} from "./user";
-import {useDispatch} from "react-redux";
 
 const cookies = new Cookies()
 
 
 export const auth = createAsyncThunk("security/auth",
     async (info) => {
-        // const dispatch = useDispatch()
         const {data} = await axios.post("http://localhost:8080/login", info)
         const decoded = jwt(data.token)
         cookies.set('token', data.token, {path: '/', expires: new Date(Date.now() + decoded.exp)})
-        // dispatch(fetchUser(data.token))
-        return data
+        return data.token
     })
 
 export const reg = createAsyncThunk("security/reg",
@@ -23,7 +19,14 @@ export const reg = createAsyncThunk("security/reg",
         const {data} = await axios.post("http://localhost:8080/registration", info)
         const decoded = jwt(data.token)
         cookies.set('token', data.token, {path: '/', expires: new Date(Date.now() + decoded.exp)})
-        return data
+
+        return data.token
+    }
+)
+
+export const getCookies = createAsyncThunk("security/cookies",
+    async () => {
+        return await cookies.get('token')
     }
 )
 
@@ -45,6 +48,7 @@ const securitySlice = createSlice({
             .addCase(auth.fulfilled, (state, action) => {
                 state.status = 'succeeded'
                 state.token = action.payload
+
             })
             .addCase(auth.rejected, (state, action) => {
                 state.status = 'failed'
@@ -63,8 +67,23 @@ const securitySlice = createSlice({
                 state.token = null
                 state.error = action.error.message
             })
+            .addCase(getCookies.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(getCookies.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.token = action.payload
+            })
+            .addCase(getCookies.rejected, (state, action) => {
+                state.status = 'failed'
+                state.token = null
+                state.error = action.error.message
+            })
     }
 })
 
-export const getToken = (state) => state.security.token
+export const selectToken = (state) => state.auth.token
+
+export const selectTokenStatus = (state) => state.auth.status
+
 export const securityReducer = securitySlice.reducer

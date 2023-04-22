@@ -1,8 +1,4 @@
 import {Link} from "react-router-dom";
-import Cookies from "universal-cookie";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchUser, selectUserStatus} from "../../redux/slices/user";
-import {useEffect} from "react";
 
 function MainPage() {
 
