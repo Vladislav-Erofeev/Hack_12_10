@@ -22,7 +22,8 @@ import java.nio.file.Paths;
 public class GameController {
     private final LevelService levelService;
     private final ImageNameService imageNameService;
-    private final String UPLOAD_DIRECTORY = "C:/images/";
+    private final String UPLOAD_DIRECTORY = "/images"; // в docker
+//    private final String UPLOAD_DIRECTORY = "C:/images"; // на локалке
 
     /**
      * GET - "/level/{id}"
