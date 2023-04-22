@@ -9,7 +9,6 @@ import tft.GameBackend.errors.LevelNotFoundException;
 import tft.GameBackend.reopsitories.LevelRepository;
 
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.Optional;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -30,9 +29,13 @@ public class LevelService {
         for (int i = 0; i < 30; i++) {
             field[i] = Arrays.copyOfRange(level.getField(), 30 * i, 30 * (i + 1));
         }
-        LevelDTO levelDTO = new LevelDTO();
-        levelDTO.setUrl(level.getUrl());
-        levelDTO.setField(field);
+        LevelDTO levelDTO = LevelDTO.builder()
+                .box(level.getBoxCount())
+                .stoplight(level.getStoplightCount())
+                .smooth(level.getSmoothCount())
+                .field(field)
+                .url(level.getUrl())
+                .build();
         return levelDTO;
     }
 
@@ -41,9 +44,13 @@ public class LevelService {
         int[] field = Stream.of(levelDTO.getField())
                 .flatMapToInt(IntStream::of)
                 .toArray();
-        Level level = new Level();
-        level.setField(field);
-        level.setUrl(levelDTO.getUrl());
+        Level level = Level.builder()
+                .field(field)
+                .url(levelDTO.getUrl())
+                .smoothCount(levelDTO.getSmooth())
+                .boxCount(levelDTO.getBox())
+                .stoplightCount(levelDTO.getStoplight())
+                .build();
         levelRepository.save(level);
     }
 

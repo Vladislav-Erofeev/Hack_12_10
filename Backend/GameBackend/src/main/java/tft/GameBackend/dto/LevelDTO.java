@@ -1,14 +1,17 @@
 package tft.GameBackend.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.web.bind.annotation.GetMapping;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@Builder
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class LevelDTO {
-    private int[][] field;
-    private String url;
+    int[][] field;
+    String url;
+    int box;
+    int stoplight;
+    int smooth;
 }
