@@ -18,7 +18,7 @@ const FeedList = () => {
 
     return (
         <div className="my-container">
-            <h2 className="text-center my-3">Новости</h2>
+            <h2 className="text-center my-3 titel_one">Новости</h2>
             <FeedListComponent feeds={feeds}/>
         </div>
     )

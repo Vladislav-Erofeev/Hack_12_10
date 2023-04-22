@@ -12,7 +12,7 @@ const FeedListComponent = ({feeds}) => {
     }
 
     return (feeds.map(feed => (
-        <div style={{border: "#604636 solid"}} className="m-3 p-3 border-4 rounded-3" key={feed.id}>
+        <div className="m-3 p-3 border-4 rounded-3 feeds-frame" key={feed.id}>
             <div className="d-flex mb-3 align-items-center">
                 <Link style={{width: "100px", height: "100px"}} to={`/user/${feed.author.id}`}>
                     {feed.author.url === null
