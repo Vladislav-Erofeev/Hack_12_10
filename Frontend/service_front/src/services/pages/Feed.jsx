@@ -3,6 +3,7 @@ import {Link, useParams} from "react-router-dom";
 import {get_feed} from "../requests";
 import {useSelector} from "react-redux";
 import {selectToken} from "../../redux/slices/security";
+import CustomCarousel from "../components/CustomCarousel";
 
 
 const Feed = () => {
@@ -13,10 +14,11 @@ const Feed = () => {
     const [feed, setFeed] = useState(null)
 
     useEffect(() => {
-        get_feed(token, feedId).then(res => {
-            setFeed(res)
-        })
-    }, [])
+        if (token)
+            get_feed(token, feedId).then(res => {
+                setFeed(res)
+            })
+    }, [token])
 
     if (!feed) {
         return (
@@ -43,6 +45,7 @@ const Feed = () => {
             </div>
             <div>
                 <p>{feed.body}</p>
+                <CustomCarousel images={feed.images}/>
             </div>
         </div>
     )
