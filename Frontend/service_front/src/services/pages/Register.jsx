@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useDispatch} from 'react-redux';
 import {Button} from "reactstrap";
 import {reg} from "../../redux/slices/security";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const AdminLogin = () => {
     const dispatch = useDispatch()
@@ -46,12 +46,14 @@ const AdminLogin = () => {
                 <input type="file" required onChange={(event) => {
                     setFile(event.target.files[0])
                 }}/>
-                <Button text="Войти" onClick={(event) => {
+                <Button onClick={(event) => {
                     event.preventDefault()
                     register()
                     navigate("/")
-                }}/>
+                }}>Зарегистрироваться</Button>
+
             </form>
+            <Link to={"/login"}>У меня уже есть аккаунт</Link>
         </>
     )
 }

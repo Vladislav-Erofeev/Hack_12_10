@@ -78,6 +78,15 @@ code {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* profile images in comp */
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    object-fit: cover
+}
+
 /*  Profile  */
 
 .profile-avatar {
@@ -89,11 +98,18 @@ code {
 
 
 
+
+.info-banner-item {
+    width: 30%;
+}
+
+
 @media (max-width: 600px) {
-    .info-banner-item h2{
+    .info-banner-item h2 {
         font-size: 20px;
     }
-    .info-banner-item h3{
+
+    .info-banner-item h3 {
         font-size: 16px;
     }
 }
@@ -110,6 +126,7 @@ code {
 .spinner h4 {
     margin: 5px;
 }
+
 /*gggggggggggggggggggg*/
 
 .info-banner-item{
@@ -230,5 +247,23 @@ code {
     font-size: 20px;
     text-align: left;
 
+}
+
+
+
+.img-carousel {
+    height: 700px
+}
+
+@media (max-width: 800px) {
+    .img-carousel {
+        height: 400px
+    }
+}
+
+@media (max-width: 500px) {
+    .img-carousel {
+        height: 250px
+    }
 }
 
