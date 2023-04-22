@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import FeedListComponent from "../components/FeedListComponent";
-import {get_user, get_user_feeds} from "../requests";
-import {useSelector} from "react-redux";
-import {selectToken} from "../../redux/slices/security";
+import {get_user, get_user_feeds, get_user_rating} from "../requests";
+import {useDispatch, useSelector} from "react-redux";
+import {logout, selectToken} from "../../redux/slices/security";
+import {Button} from "reactstrap";
 
 
 const Profile = () => {
@@ -11,21 +12,34 @@ const Profile = () => {
 
     const token = useSelector(selectToken)
 
+    const dispatch = useDispatch()
+
     const [user, setUser] = useState(null)
+
+    const [rating, setRating] = useState(null)
 
     const [feeds, setFeeds] = useState([])
 
     useEffect(() => {
-        get_user(token, userId).then(res => {
-            setUser(res)
-        })
-    }, [])
+        if (token)
+            get_user(token, userId).then(res => {
+                setUser(res)
+            })
+    }, [token])
 
     useEffect(() => {
-        get_user_feeds(token, userId).then(res => {
-            setFeeds(res)
-        })
-    }, [])
+        if (token && user)
+            get_user_feeds(token, userId).then(res => {
+                setFeeds(res)
+            })
+    }, [user])
+
+    useEffect(() => {
+        if (user)
+            get_user_rating(token, user.id).then(res => {
+                setRating(res)
+            })
+    }, [user])
 
     if (!user) {
         return (
@@ -39,17 +53,26 @@ const Profile = () => {
         <div className="my-container">
             <div className="d-flex my-4">
                 <div className="profile-avatar">
-                    {user.url === null
-                        ? <img style={{width: "100%", height: "100%", borderRadius: "100%"}}
-                               src="https://i.stack.imgur.com/U9zFC.png?s=192&g=1" alt=""/>
-                        : <img style={{width: "100%", height: "100%", borderRadius: "100%"}}
-                               src={`http://localhost:8080/image${user.url}`} alt=""/>
-                    }
+                    <img className="profile-img"
+                         src={user.url === null
+                             ? "https://i.stack.imgur.com/U9zFC.png?s=192&g=1"
+                             : `http://localhost:8080/image${user.url}`
+                         } alt=""/>
                 </div>
                 <div className="profile-info ms-5">
                     <h1 className="mb-3">{user.name}</h1>
-                    <h3 className="m-0">Лучший результат {user.bestScore}</h3>
+                    <h3 className="mb-3">Лучший результат {user.bestScore}</h3>
+                    <h3 className="m-0">Место в рейтинге {rating}</h3>
                 </div>
+                <div className="ms-auto"><Button onClick={event => {
+                    event.preventDefault()
+                    dispatch(logout())
+                    window.location.reload();
+                }}>Выйти</Button></div>
+            </div>
+            <div className="d-flex align-items-center">
+                <h1 className="m-0">Посты</h1>
+                <Button className="ms-auto" to="/add_feed" tag={Link}>Добавить пост</Button>
             </div>
             <FeedListComponent feeds={feeds}/>
         </div>

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux';
 import {Button} from "reactstrap";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {auth} from "../../redux/slices/security";
 
 const AdminLogin = () => {
@@ -22,12 +22,13 @@ const AdminLogin = () => {
                 <input type="password" required onChange={(event) => {
                     setAdmAuth({...admAuth, password: event.target.value})
                 }}/>
-                <Button text="Войти" onClick={(event) => {
+                <Button onClick={(event) => {
                     event.preventDefault()
-                    dispatch(auth(admAuth, dispatch))
+                    dispatch(auth(admAuth))
                     navigate("/")
-                }}/>
+                }}>Войти</Button>
             </form>
+            <Link to={"/register"}>У меня нет аккаунта</Link>
         </>
     )
 }

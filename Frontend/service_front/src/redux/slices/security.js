@@ -19,14 +19,19 @@ export const reg = createAsyncThunk("security/reg",
         const {data} = await axios.post("http://localhost:8080/registration", info)
         const decoded = jwt(data.token)
         cookies.set('token', data.token, {path: '/', expires: new Date(Date.now() + decoded.exp)})
-
         return data.token
     }
 )
 
-export const getCookies = createAsyncThunk("security/cookies",
+export const getCookies = createAsyncThunk("security/getCookies",
     async () => {
         return await cookies.get('token')
+    }
+)
+
+export const logout = createAsyncThunk("security/logout",
+    async () => {
+        return await cookies.set('token', 'none', {path: '/', expires: new Date(Date.now() + 1)})
     }
 )
 
@@ -75,6 +80,18 @@ const securitySlice = createSlice({
                 state.token = action.payload
             })
             .addCase(getCookies.rejected, (state, action) => {
+                state.status = 'failed'
+                state.token = null
+                state.error = action.error.message
+            })
+            .addCase(logout.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(logout.fulfilled, (state, action) => {
+                state.status = 'idle'
+                state.token = null
+            })
+            .addCase(logout.rejected, (state, action) => {
                 state.status = 'failed'
                 state.token = null
                 state.error = action.error.message

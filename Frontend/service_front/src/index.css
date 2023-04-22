@@ -4,12 +4,27 @@
     padding: 0;
     font-size: 16px;
     box-sizing: border-box;
-    font-family: Montserrat, sans-serif;
+    /*font-family: Montserrat, sans-serif;*/
+}
+@font-face {
+    font-family: 'Play';
+    src: url('./fonts/Play-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('./fonts/PressStart2P-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 body {
     margin: 0;
-    background-color: #93bcc7 !important;
+    background-color: #F5D7BD !important;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -35,6 +50,17 @@ code {
     background: #fcc45c !important;
     font-weight: 500 !important;
     font-size: 21px !important;
+    border-radius: 50px !important;
+    border: 1px solid #000000 !important;
+    box-shadow: 3px 5px 7px 0px #020202 !important;
+    font-family: 'Press Start 2P' !important;
+    color: #F2F2F2 !important;
+    text-align: center !important;
+    text-shadow: 2px 0 2px #04597C,
+    0 2px 2px #04597C,
+    -2px 0 2px #04597C,
+    0 -2px 2px #04597C !important;
+
 }
 
 .my-btn:hover {
@@ -48,8 +74,17 @@ code {
 }
 
 .nav-link:hover {
-    color: #f8bd43 !important;
+    color: #e54185 !important;
     background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* profile images in comp */
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    object-fit: cover
 }
 
 /*  Profile  */
@@ -61,15 +96,20 @@ code {
 
 /*  Main page  */
 
-.info-banner-item{
+
+
+
+.info-banner-item {
     width: 30%;
 }
 
+
 @media (max-width: 600px) {
-    .info-banner-item h2{
+    .info-banner-item h2 {
         font-size: 20px;
     }
-    .info-banner-item h3{
+
+    .info-banner-item h3 {
         font-size: 16px;
     }
 }
@@ -85,4 +125,184 @@ code {
 
 .spinner h4 {
     margin: 5px;
+}
+
+/*gggggggggggggggggggg*/
+
+.info-banner-item{
+    width: 325px;
+    height: 400px;
+    background: url(/public/bg-card.jpg);
+    position: relative;
+    box-shadow: 10px 10px 0px 0px #020202BF;
+    border-radius: 5px;
+}
+
+.info-banner-item img{
+    display: block;
+    position: absolute;
+    width: 175px;
+    height: 175px;
+    top: 26px;
+    left: calc(50% - 175px/2);
+}
+
+.info-banner-item h2{
+    position: absolute;
+    top: 220px;
+    font-family: 'Press Start 2P';
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+}
+.info-banner-item h3{
+    position: absolute;
+    top: 270px;
+    font-family: 'Play';
+    font-size: 16px;
+    padding: 0 22px;
+    text-align: left;
+}
+
+
+.header{
+    font-family: 'Press Start 2P';
+    background-color: #069BC5;
+    border-bottom: 5px solid #04597C;
+    height: 140px;
+}
+
+.nav-link{
+    text-shadow: 2px 0 2px #04597C,
+    0 2px 2px #04597C,
+    -2px 0 2px #04597C,
+    0 -2px 2px #04597C,
+    0px 4px 4px #00000040;
+}
+.header__text--play{
+    color: #04597C !important;
+    text-shadow: 2px 0 2px #F2F2F2,
+    0 2px 2px #F2F2F2,
+    -2px 0 2px #F2F2F2,
+    0 -2px 2px #F2F2F2,
+    0px 4px 4px #00000040;
+}
+
+.titel_one{
+    font-family: 'Press Start 2P';
+    text-align: center;
+    color: #F2F2F2;
+    text-shadow: 2px 0 2px #04597C,
+    0 2px 2px #04597C,
+    -2px 0 2px #04597C,
+    0 -2px 2px #04597C,
+    2px 4px 10px #020202;
+}
+
+.titel_two{
+    color: #F2F2F2;
+    text-shadow: 1px 0 1px #020202,
+    0 1px 1px #020202,
+    -1px 0 1px #020202,
+    0 -1px 1px #020202,
+    0px 4px 4px  #00000040;
+}
+
+.feeds-frame{
+    background: url("/public/bg-feeds.png");
+    border: 5px solid #069BC5;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 10px 0px 0px #000000BF;
+
+}
+.feeds-frame .user{
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.feeds-frame .user-img{
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #020202;
+}
+.feeds-frame .user-text{
+    font-family: 'Press Start 2P';
+    color: #F2F2F2;
+    font-size: 20px; /*!!!!!!!!!!!!!!!!!!! */
+    text-shadow: 2px 0 2px #E74286,
+    0 2px 2px #E74286,
+    -2px 0 2px #E74286,
+    0 -2px 2px #E74286,
+    2px 4px 10px #020202;
+    margin-bottom: 0;
+}
+
+.feeds-frame .user-descr{
+    font-family: 'Play';
+    font-size: 20px;
+    text-align: left;
+}
+
+
+
+.img-carousel {
+    height: 700px
+}
+
+@media (max-width: 800px) {
+    .img-carousel {
+        height: 400px
+    }
+}
+
+@media (max-width: 500px) {
+    .img-carousel {
+        height: 250px
+    }
+}
+
+/*button*/
+.button-base{
+    width: fit-content;
+    height: fit-content;
+    border-radius: 50px;
+    padding: 10px;
+    font-family: 'Press Start 2P';
+    color: #F2F2F2;
+    text-shadow: 2px 0 2px #020202,
+    0 2px 2px #020202,
+    -2px 0 2px #020202,
+    0 -2px 2px #020202;
+    box-shadow: 3px 5px 7px 0px #020202;
+}
+.user-name-base{
+    font-family: 'Press Start 2P';
+    color: #F2F2F2;
+    text-shadow: 2px 0 2px #020202,
+    0 2px 2px #020202,
+    -2px 0 2px #020202,
+    0 -2px 2px #020202;
+    box-shadow: 3px 5px 7px 0px #020202;
+}
+
+.megaconteiner{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.my-container{
+    flex-grow: 1;
+}
+
+.footer{
+    flex-shrink: 0;
 }
