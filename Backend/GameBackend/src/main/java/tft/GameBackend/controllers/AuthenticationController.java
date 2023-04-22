@@ -20,7 +20,8 @@ public class AuthenticationController {
 
     private final AuthenticationService service;
     private final ImageNameService imageNameService;
-    private final String UPLOAD_DIRECTORY = "C:/images/person";
+    private final String UPLOAD_DIRECTORY = "/images/person/"; // в docker
+//    private final String UPLOAD_DIRECTORY = "C:/images/person/"; // на локалке
 
     /**
      * @param request - запрос вида {

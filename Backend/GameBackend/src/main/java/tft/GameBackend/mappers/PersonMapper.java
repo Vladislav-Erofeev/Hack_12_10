@@ -19,7 +19,7 @@ public interface PersonMapper {
     PersonDTO personToPersonDTO(Person person);
 
     @Mapping(target = "name", source = "username")
-    @Mapping(target = "url", source = "url")
+//    @Mapping(target = "url", source = "url")
     FriendDTO personToFriendDTO(Person person);
 
     @Mapping(target = "name", source = "username")
