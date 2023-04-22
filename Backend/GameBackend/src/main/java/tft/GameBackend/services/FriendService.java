@@ -21,6 +21,9 @@ public class FriendService {
 
     @Transactional
     public void sendRequest(long personFrom, long personTo) throws NotUniqueFriendRequest {
+        if (personFrom == personTo)
+            throw new NotUniqueFriendRequest("You can't send a friend request to yourself");
+        // проверка на отсутствие такого запроса в бд
         Optional<FriendRequest> optionalFriendRequest = friendRequestRepository.
                 findFriendRequestByPersonFromAndPersonTo(personFrom, personTo);
         if (optionalFriendRequest.isEmpty())
@@ -28,6 +31,15 @@ public class FriendService {
         if (optionalFriendRequest.isPresent())
             throw new NotUniqueFriendRequest("Friend request from " + personFrom + " to " + personTo +
                     " was sent earlier");
+
+        // проверка на отсутствие человека в списке друзей
+        Person person = personRepository.findById(personFrom).get();
+        Person person1 = person.getFriendsList1().stream()
+                .filter(p -> p.getId() == personTo).findAny().orElse(null);
+        if (person1 == null)
+            person1 = person.getFriendsList2().stream().filter(p -> p.getId() == personTo).findAny().orElse(null);
+        if (person1 != null)
+            throw new NotUniqueFriendRequest("You can't send a friend request to your friend");
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
