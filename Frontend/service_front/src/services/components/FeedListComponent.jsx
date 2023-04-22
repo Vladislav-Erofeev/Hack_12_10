@@ -13,22 +13,24 @@ const FeedListComponent = ({feeds}) => {
 
     return (feeds.map(feed => (
         <div className="m-3 p-3 border-4 rounded-3 feeds-frame" key={feed.id}>
-            <div className="d-flex mb-3 align-items-center">
-                <Link style={{width: "100px", height: "100px"}} to={`/user/${feed.author.id}`}>
+            <div className="user">
+                <Link /*style={{width: "100px", height: "100px"}}*/ to={`/user/${feed.author.id}`}>
                     {feed.author.url === null
-                        ? <img style={{width: "100%", height: "100%", borderRadius: "100%"}}
+                        ? <img className="user-img"
+                               // style={{width: "100%", height: "100%", borderRadius: "100%"}}
                                src="https://i.stack.imgur.com/U9zFC.png?s=192&g=1" alt=""/>
-                        : <img style={{width: "100%", height: "100%", borderRadius: "100%"}}
+                        : <img className="user-img"
+                            // style={{width: "100%", height: "100%", borderRadius: "100%"}}
                                src={`http://localhost:8080/image${feed.author.url}`} alt=""/>
                     }
                 </Link>
                 <Link className="text-decoration-none text-dark profile-info ms-4" to={`/user/${feed.author.id}`}>
-                    <h2>{feed.author.name}</h2>
+                    <h2 className="user-text">{feed.author.name} User228</h2>
                 </Link>
             </div>
             <div>
-                <p>{feed.body}</p>
-                <Link to={`/feeds/${feed.id}`}><img src={`http://localhost:8080/image${feed.images[0].url}`}
+                <p className="user-descr">{feed.body}Это бесплатно. Просто создайте аккаунт и начните играть — никаких подписок и платежей. Новые друзья. Находите интересных вам игроков и добавляйте их в друзья. Делитесь своими достижениями и следите за интересующими вас игроками. Играйте где угодноВы можете играть на любом устройстве..</p>
+                <Link to={`/feeds/${feed.id}`} className="user-descr-img"><img src={`http://localhost:8080/image${feed.images[0].url}`}
                                                     width="100%" alt=""/></Link>
             </div>
         </div>

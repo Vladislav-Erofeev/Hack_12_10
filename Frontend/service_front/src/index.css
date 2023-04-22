@@ -192,5 +192,43 @@ code {
 .feeds-frame{
     background: url("/public/bg-feeds.png");
     border: 5px solid #069BC5;
+    display: flex;
+    flex-direction: column;
+
+}
+.feeds-frame .user{
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.feeds-frame .user-img{
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #020202;
+}
+.feeds-frame .user-text{
+    font-family: 'Press Start 2P';
+    color: #F2F2F2;
+    font-size: 20px; /*!!!!!!!!!!!!!!!!!!! */
+    text-shadow: 2px 0 2px #04597C,
+    0 2px 2px #E74286,
+    -2px 0 2px #E74286,
+    0 -2px 2px #E74286,
+    2px 4px 10px #020202;
+    margin-bottom: 0;
+}
+
+.feeds-frame .user-descr{
+    font-family: 'Play';
+    font-size: 20px;
+    text-align: left;
+
 }
 
