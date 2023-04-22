@@ -115,6 +115,7 @@ public class FriendController {
      * @param id - id пользователя, которому направлен запрос
      * @return
      */
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/cancel_request/{id}")
     public HttpStatus cancelFriendRequest(@PathVariable("id") long id) {
         Person person = authenticatedPersonService.getAuthenticatedPerson();
