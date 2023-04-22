@@ -1,15 +1,14 @@
 package tft.GameBackend.entities;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "level")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Level {
@@ -23,4 +22,13 @@ public class Level {
 
     @Column(name = "url")
     String url;
+
+    @Column(name = "box")
+    int boxCount;
+
+    @Column(name = "stoplight")
+    int stoplightCount;
+
+    @Column(name = "smooth")
+    int smoothCount;
 }

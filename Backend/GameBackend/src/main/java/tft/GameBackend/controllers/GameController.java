@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tft.GameBackend.dto.LevelDTO;
-import tft.GameBackend.dto.NewLevelDTO;
 import tft.GameBackend.errors.LevelErrorResponse;
 import tft.GameBackend.errors.LevelNotFoundException;
 import tft.GameBackend.services.LevelService;
@@ -28,10 +27,11 @@ public class GameController {
     /**
      * GET - "/level/{id}"
      * Получение уровня по его id
+     *
      * @param levelId - id уровня
      * @return объект {
-     *     "field": двумерный массив int 30 на 30,
-     *     "url": адрес фотографии
+     * "field": двумерный массив int 30 на 30,
+     * "url": адрес фотографии
      * }
      * @throws LevelNotFoundException
      */
@@ -43,19 +43,23 @@ public class GameController {
     /**
      * POST - "/level/add"
      * Добавление нового уровня
-     * @param newLevelDTO - двумерный массив 30 на 30 типа int
-     * @param file - фотография
+     *
+     * @param levelDTO - объект вида {
+     *                 int[][] field - матрица игрового поля
+     *                 int box - количество коробок
+     *                 int stoplight - количество остановок светофора
+     *                 int freeze - количество заморозок
+     *                 }
+     * @param file     - фотография
      * @return OK
      * @throws IOException
      */
 
     @PostMapping("/add")
-    public HttpStatus addLevel(@RequestPart("field")NewLevelDTO newLevelDTO, @RequestPart MultipartFile file) throws IOException {
+    public HttpStatus addLevel(@RequestPart("field") LevelDTO levelDTO, @RequestPart MultipartFile file) throws IOException {
         String fileName = imageNameService.generate(file.getContentType());
         Path path = Paths.get(UPLOAD_DIRECTORY + "/level/", fileName);
         Files.write(path, file.getBytes());
-        LevelDTO levelDTO = new LevelDTO();
-        levelDTO.setField(newLevelDTO.getField());
         levelDTO.setUrl("/level/" + fileName);
         levelService.save(levelDTO);
         return HttpStatus.OK;
@@ -64,6 +68,7 @@ public class GameController {
     /**
      * DELETE - "/level/dele/{id}"
      * Удаление поста по его id
+     *
      * @param id - id поста
      * @return
      */
