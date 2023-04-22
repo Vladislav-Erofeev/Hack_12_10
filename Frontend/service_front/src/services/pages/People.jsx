@@ -6,7 +6,7 @@ const People = () => {
 
     return (
         <div className="my-container">
-            <h1 className="my-3">Люди</h1>
+            <h1 className="my-3 titel_one">Люди</h1>
             <UserList
                 getUsers={get_all_users}
                 actionToUser1={send_friend_request}

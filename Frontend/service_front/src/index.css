@@ -134,6 +134,8 @@ code {
     height: 400px;
     background: url(/public/bg-card.jpg);
     position: relative;
+    box-shadow: 10px 10px 0px 0px #020202BF;
+    border-radius: 5px;
 }
 
 .info-banner-item img{
@@ -211,6 +213,7 @@ code {
     border: 5px solid #069BC5;
     display: flex;
     flex-direction: column;
+    box-shadow: 10px 10px 0px 0px #000000BF;
 
 }
 .feeds-frame .user{
@@ -234,7 +237,7 @@ code {
     font-family: 'Press Start 2P';
     color: #F2F2F2;
     font-size: 20px; /*!!!!!!!!!!!!!!!!!!! */
-    text-shadow: 2px 0 2px #04597C,
+    text-shadow: 2px 0 2px #E74286,
     0 2px 2px #E74286,
     -2px 0 2px #E74286,
     0 -2px 2px #E74286,
@@ -246,7 +249,6 @@ code {
     font-family: 'Play';
     font-size: 20px;
     text-align: left;
-
 }
 
 
@@ -267,3 +269,26 @@ code {
     }
 }
 
+/*button*/
+.button-base{
+    width: fit-content;
+    height: fit-content;
+    border-radius: 50px;
+    padding: 10px;
+    font-family: 'Press Start 2P';
+    color: #F2F2F2;
+    text-shadow: 2px 0 2px #020202,
+    0 2px 2px #020202,
+    -2px 0 2px #020202,
+    0 -2px 2px #020202;
+    box-shadow: 3px 5px 7px 0px #020202;
+}
+.user-name-base{
+    font-family: 'Press Start 2P';
+    color: #F2F2F2;
+    text-shadow: 2px 0 2px #020202,
+    0 2px 2px #020202,
+    -2px 0 2px #020202,
+    0 -2px 2px #020202;
+    box-shadow: 3px 5px 7px 0px #020202;
+}
