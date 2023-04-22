@@ -46,7 +46,7 @@ const People = ({nameAction1, nameAction2, getUsers, actionToUser1, actionToUser
                     </div>
                 ))
                 :
-                <h3>Мы никого не нашли %(</h3>
+                <h3 className="titel_two">Мы никого не нашли %(</h3>
             }
 
         </div>

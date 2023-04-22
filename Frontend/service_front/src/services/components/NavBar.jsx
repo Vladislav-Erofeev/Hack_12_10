@@ -17,8 +17,8 @@ function NavBar() {
     const toggle = () => setIsOpen(!isOpen);
 
     return (
-        <div style={{background: "#04597c"}}>
-            <Navbar expand="md" dark className="fs-5 my-container py-3">
+        <div className="header" style={{background: "#0699c2"}}>
+            <Navbar expand="md" dark className="fs-5 my-container py-5">
                 <Nav navbar>
                     <NavItem>
                         <NavLink to="/" tag={Li}>Главная</NavLink>
@@ -45,7 +45,7 @@ function NavBar() {
                             <NavLink to="/profile" tag={Li}>Профиль</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink to="/game" tag={Li}>Играть</NavLink>
+                            <NavLink className="header__text--play" to="/game" tag={Li}>Играть</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>
