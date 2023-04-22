@@ -28,7 +28,7 @@ const AdminLogin = () => {
                     navigate("/")
                 }}>Войти</Button>
             </form>
-            <Link to={"/login"}>У меня нет аккаунта</Link>
+            <Link to={"/register"}>У меня нет аккаунта</Link>
         </>
     )
 }
