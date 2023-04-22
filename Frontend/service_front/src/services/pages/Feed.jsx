@@ -1,29 +1,21 @@
 import React, {useEffect, useState} from 'react'
 import {Link, useParams} from "react-router-dom";
-import Cookies from "universal-cookie";
-import axios from "axios";
+import {get_feed} from "../requests";
+import {useSelector} from "react-redux";
+import {selectToken} from "../../redux/slices/security";
 
 
 const Feed = () => {
     const {feedId} = useParams();
 
-    const cookies = new Cookies();
-
-    const token = cookies.get('token')
+    const token = useSelector(selectToken)
 
     const [feed, setFeed] = useState(null)
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/feed/${feedId}`,
-            {
-                headers: {
-                    "access-control-allow-origin": "http://localhost:3000",
-                    "Authorization": `Bearer ${token}`,
-                }
-            }).then(res => {
-                setFeed(res.data)
-            }
-        );
+        get_feed(token, feedId).then(res => {
+            setFeed(res)
+        })
     }, [])
 
     if (!feed) {

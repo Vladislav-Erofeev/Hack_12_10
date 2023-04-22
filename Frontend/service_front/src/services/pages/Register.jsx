@@ -1,50 +1,42 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {useDispatch} from 'react-redux';
 import {Button} from "reactstrap";
 import {reg} from "../../redux/slices/security";
-import axios from "axios";
-import Cookies from "universal-cookie";
-import {fetchUser} from "../../redux/slices/user";
-import jwt from "jwt-decode";
+import {useNavigate} from "react-router-dom";
 
 const AdminLogin = () => {
-    const cookies = new Cookies();
+    const dispatch = useDispatch()
+    const navigate = useNavigate();
 
     const [admReg, setAdmReg] = useState({
+        username: "",
         email: "",
         password: ""
     })
 
     const [file, setFile] = useState(null)
 
-    const dispatch = useDispatch()
-
     const register = async () => {
-        dispatch(reg(admReg, dispatch))
-        const token = cookies.get('token')
-        console.log(jwt(token))
-        if (file) {
-            console.log(file)
-            const formData = new FormData();
+        const formData = new FormData();
+
+        formData.append('request', new Blob([JSON.stringify(admReg)], {
+            type: "application/json"
+        }))
+
+        if (file)
             formData.append('file', file)
-            console.log(formData)
-            axios.post('http://localhost:8080/person_image/add', formData,
-                {
-                    headers: {
-                        "access-control-allow-origin": "http://localhost:3000",
-                        "Authorization": `Bearer ${token}`,
-                    }
-                }
-            ).catch(error => {
-                console.error('There was an error!', error);
-            });
-        }
+
+        dispatch(reg(formData))
     }
 
     return (
         <>
+            <h1>Регистрация</h1>
             <form>
-                <h1>Регистрация</h1>
+                <label htmlFor=""></label>
+                <input type="text" required onChange={(event) => {
+                    setAdmReg({...admReg, username: event.target.value})
+                }}/>
                 <input type="email" required onChange={(event) => {
                     setAdmReg({...admReg, email: event.target.value})
                 }}/>
@@ -57,6 +49,7 @@ const AdminLogin = () => {
                 <Button text="Войти" onClick={(event) => {
                     event.preventDefault()
                     register()
+                    navigate("/")
                 }}/>
             </form>
         </>

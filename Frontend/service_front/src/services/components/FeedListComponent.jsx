@@ -14,7 +14,7 @@ const FeedListComponent = ({feeds}) => {
     return (feeds.map(feed => (
         <div style={{border: "#604636 solid"}} className="m-3 p-3 border-4 rounded-3" key={feed.id}>
             <div className="d-flex mb-3 align-items-center">
-                <Link style={{width: "50px", height: "50px"}} to={`/user/${feed.author.id}`}>
+                <Link style={{width: "100px", height: "100px"}} to={`/user/${feed.author.id}`}>
                     {feed.author.url === null
                         ? <img style={{width: "100%", height: "100%", borderRadius: "100%"}}
                                src="https://i.stack.imgur.com/U9zFC.png?s=192&g=1" alt=""/>
