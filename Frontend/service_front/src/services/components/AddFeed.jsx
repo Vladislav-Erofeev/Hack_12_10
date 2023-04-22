@@ -21,7 +21,9 @@ const AdminLogin = () => {
                 }
             }
         )
+
         console.log(response.data)
+
         if (file) {
             console.log(file)
             const formData = new FormData();

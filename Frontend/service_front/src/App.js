@@ -37,21 +37,21 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<><NavBar/><MainPage/><Footer/></>}/>
+                <Route path='/' element={<div className='megaconteiner'><NavBar/><MainPage style={{color: 'red'}}/><Footer/></div>}/>
 
-                <Route path='/people' element={<><NavBar/><People/><Footer/></>}/>
-                <Route path='/friends' element={<><NavBar/><Friends/><Footer/></>}/>
+                <Route path='/people' element={<div className='megaconteiner'><NavBar/><People/><Footer/></div>}/>
+                <Route path='/friends' element={<div className='megaconteiner'><NavBar/><Friends/><Footer/></div>}/>
                 <Route path="/profile" element={<PrivateRoute/>}/>
-                <Route path="/user/:userId" element={<><NavBar/><Profile/><Footer/></>}/>
+                <Route path="/user/:userId" element={<div className='megaconteiner'><NavBar/><Profile/><Footer/></div>}/>
 
-                <Route path='/login' element={<><NavBar/><Login/></>}/>
-                <Route path='/registration' element={<><NavBar/><Register/><Footer/></>}/>
+                <Route path='/login' element={<div className='megaconteiner'><NavBar/><Login/></div>}/>
+                <Route path='/registration' element={<div className='megaconteiner'><NavBar/><Register/><Footer/></div>}/>
 
-                <Route path='/feeds' element={<><NavBar/><FeedList/><Footer/></>}/>
-                <Route path='/feeds/:feedId' element={<><NavBar/><Feed/><Footer/></>}/>
-                <Route path='/add_feed' element={<><NavBar/><AddFeed/><Footer/></>}/>
+                <Route path='/feeds' element={<div className='megaconteiner'><NavBar/><FeedList/><Footer/></div>}/>
+                <Route path='/feeds/:feedId' element={<div className='megaconteiner'><NavBar/><Feed/><Footer/></div>}/>
+                <Route path='/add_feed' element={<div className='megaconteiner'><NavBar/><AddFeed/><Footer/></div>}/>
 
-                <Route path='/rating' element={<><NavBar/><Rating/><Footer/></>}/>
+                <Route path='/rating' element={<div className='megaconteiner'><NavBar/><Rating/><Footer/></div>}/>
 
                 <Route path='/game' element={<GameUI/>}/>
             </Routes>
