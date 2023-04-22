@@ -110,6 +110,19 @@ public class FriendController {
     }
 
     /**
+     * DELETE - "/friend/cancel_request/{id}"
+     * Отмена отправки запроса на дружбу
+     * @param id - id пользователя, которому направлен запрос
+     * @return
+     */
+    @DeleteMapping("/cancel_request/{id}")
+    public HttpStatus cancelFriendRequest(@PathVariable("id") long id) {
+        Person person = authenticatedPersonService.getAuthenticatedPerson();
+        friendService.denyRequest(person.getId(), id);
+        return HttpStatus.OK;
+    }
+
+    /**
      * DELETE - "/friends/friend_request/{id}"
      * Отклонение запроса на дружбу
      *
@@ -125,7 +138,7 @@ public class FriendController {
     }
 
     /**
-     * GET - "/friends/delete/{id}"
+     * DELETE - "/friends/delete/{id}"
      * Удаление человека из списка друзей
      * @param id - id пользователя, которого надо удалить
      * @return
