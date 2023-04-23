@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const url = "http://root-backend-1:8080"
+export const url = "http://backend:8080"
 
 export async function login(info) {
     let data
