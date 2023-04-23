@@ -7,12 +7,10 @@ import {login, url} from "../../services/requests";
 const cookies = new Cookies()
 
 
-
 export const auth = createAsyncThunk("security/auth",
     async (info) => {
         let data
         await login(info).then(res => data = res)
-        console.log(data)
         const decoded = jwt(data)
         cookies.set('token', data, {path: '/', expires: new Date(Date.now() + decoded.exp)})
         return data
@@ -21,6 +19,7 @@ export const auth = createAsyncThunk("security/auth",
 export const reg = createAsyncThunk("security/reg",
     async (info) => {
         const {data} = await axios.post(`${url}/registration`, info)
+        console.log(data)
         const decoded = jwt(data.token)
         cookies.set('token', data.token, {path: '/', expires: new Date(Date.now() + decoded.exp)})
         return data.token

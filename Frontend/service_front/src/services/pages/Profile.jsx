@@ -6,12 +6,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {logout, selectToken} from "../../redux/slices/security";
 import {Button} from "reactstrap";
 import "./Profile.css"
+import {selectUser} from "../../redux/slices/user";
 
 
 const Profile = () => {
     const {userId} = useParams();
-
-    const token = useSelector(selectToken)
 
     const navigate = useNavigate();
 
@@ -23,23 +22,24 @@ const Profile = () => {
 
     const [feeds, setFeeds] = useState([])
 
-    useEffect(() => {
-        if (token)
-            get_user(token, userId).then(res => {
-                setUser(res)
-            })
-    }, [token])
+    const curUser = useSelector(selectUser)
 
     useEffect(() => {
-        if (token && user)
-            get_user_feeds(token, userId).then(res => {
+        get_user(userId).then(res => {
+            setUser(res)
+        })
+    }, [])
+
+    useEffect(() => {
+        if (user)
+            get_user_feeds(user.id).then(res => {
                 setFeeds(res)
             })
     }, [user])
 
     useEffect(() => {
         if (user)
-            get_user_rating(token, user.id).then(res => {
+            get_user_rating(user.id).then(res => {
                 setRating(res)
             })
     }, [user])
@@ -66,11 +66,15 @@ const Profile = () => {
                 <div className="d-flex flex-column justify-content-between flex-grow-1 ms-auto">
                     <div className="d-flex justify-content-between  mt-2">
                         <h1 className="titel_one titel_one--media m-0">{user.name}</h1>
-                        <Button className="my-btn btn-user" onClick={event => {
-                            event.preventDefault()
-                            dispatch(logout())
-                            navigate("/")
-                        }}>Выйти</Button>
+                        {curUser.id === user.id
+                            ?<Button className="my-btn btn-user" onClick={event => {
+                                event.preventDefault()
+                                dispatch(logout())
+                                navigate("/")
+                                window.location.reload();
+                            }}>Выйти</Button>
+                            :<></>
+                        }
                     </div>
                     <div className="align-self-center">
                         <h3 className="mb-3 dop-info">Лучший результат {user.bestScore}</h3>
@@ -78,9 +82,12 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            <div className="d-flex align-items-center">
-                <h1 className="m-0">Посты</h1>
-                <Button className="ms-auto my-btn btn-user" to="/add_feed" tag={Link}>Новая запись</Button>
+            <div className="m-3 d-flex align-items-center">
+                <h1 className="m-0 titel_one titel_one--media">Посты</h1>
+                {curUser.id === user.id
+                    ? <Button className="ms-auto my-btn btn-user" to="/add_feed" tag={Link}>Новая запись</Button>
+                    : <></>
+                }
             </div>
             <FeedListComponent feeds={feeds}/>
         </div>

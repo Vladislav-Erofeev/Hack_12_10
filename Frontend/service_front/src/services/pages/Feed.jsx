@@ -14,10 +14,9 @@ const Feed = () => {
     const [feed, setFeed] = useState(null)
 
     useEffect(() => {
-        if (token)
-            get_feed(token, feedId).then(res => {
-                setFeed(res)
-            })
+        get_feed(feedId).then(res => {
+            setFeed(res)
+        })
     }, [token])
 
     if (!feed) {
