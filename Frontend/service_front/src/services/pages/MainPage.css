@@ -1,9 +1,3 @@
-
-
-.info-banner-item {
-    width: 30%;
-}
-
 @media (max-width: 600px) {
     .info-banner-item h2 {
         font-size: 20px;
@@ -21,6 +15,7 @@
     position: relative;
     box-shadow: 10px 10px 0px 0px #020202BF;
     border-radius: 5px;
+    margin: 0 auto;
 }
 
 .info-banner-item img{
