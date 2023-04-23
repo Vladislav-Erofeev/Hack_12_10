@@ -12,7 +12,7 @@ services:
   backend:
     build: .
     volumes:
-      - C:/images:/images
+      - C:/images/images
     depends_on:
       - postgres
     environment:

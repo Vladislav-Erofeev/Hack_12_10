@@ -28,7 +28,7 @@ function MainPage() {
             <br />
             <img src="mpi.jpg" style={{width: "90%"}} alt=""/>
             <h1 className="titel_one fs-2 my-4">Почему наша игра?</h1>
-            <div className="d-flex justify-content-between">
+            <div className="d-flex flex-wrap align-items-center justify-content-between align-content-center gap-5">
                 <div className="info-banner-item">
                     <img src="card-image/1.png" alt=""/>
                     <h2>Это бесплатно</h2>
