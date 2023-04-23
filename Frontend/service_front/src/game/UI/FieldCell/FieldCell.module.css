@@ -1,0 +1,14 @@
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-position: center;
+    background-size: 90% 100%;
+    background-repeat: no-repeat;
+    transition: all 0.5s ease-in-out;
+}
+
+.cell:hover {
+    backdrop-filter: brightness(170%);
+    cursor: pointer;
+}

@@ -1,0 +1,29 @@
+.gamePlay {
+    background-color: #141426;
+    position: relative;
+    display: block;
+    grid-area: 2 / 2 / 3 / 3;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    z-index: 0;
+}
+
+.field {
+    background-image: url(../../Assets/gorodok2.png);
+    background-position: center;
+    background-size:contain;
+    z-index: 2;
+}
+
+.row {
+    display: flex;
+}
+
+@media (max-width: 90vh) {
+    .gamePlay {
+        grid-area: 3 / 1 / 4 / 3;
+    }
+}

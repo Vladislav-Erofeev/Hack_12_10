@@ -1,0 +1,8 @@
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://localhost:5432/<name>
+spring.datasource.username=
+spring.datasource.password=
+
+spring.liquibase.change-log=classpath:db/changelog/db.changelog-master.yaml
+spring.jpa.hibernate.ddl-auto=none
+liquibase.force=true
