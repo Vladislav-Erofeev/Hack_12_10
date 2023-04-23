@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const fetchField = createAsyncThunk("fetchField",
     async () => {
-        const {data} = await axios.get("http://1945811986:8080/level/{1}");
+        const {data} = await axios.get("http://194.58.119.86:8080/level/1");
         console.log(data)
         return data
     })
@@ -54,11 +54,13 @@ const fieldSlice = createSlice({
         [fetchField.fulfilled]: (state, action) => {
             state.field = action.payload.field
             state.background = action.payload.url
+            console.log(state.background)
         }
     }
 })
 
 export const selectCops = (state) => state.field.cops
 export const selectField = (state) => state.field
+export const selectBackgroundField = (state) => state.field.background
 export const {setField, setInitialField, setToolToField, setCopsMoves} = fieldSlice.actions
 export const fieldReducer = fieldSlice.reducer
