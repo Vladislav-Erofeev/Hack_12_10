@@ -9,6 +9,11 @@
     padding: 5%;
 }
 
+.menu h1 {
+    font-family: 'Pixeleum';
+    font-weight: 1000;
+}
+
 .menubar {
     background-color: #141426;
     position: relative;

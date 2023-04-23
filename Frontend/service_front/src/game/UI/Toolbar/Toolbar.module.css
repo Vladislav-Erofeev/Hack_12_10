@@ -5,9 +5,71 @@
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     height: 100%;
     z-index: 2;
     padding: 30px;
     grid-area: 1 / 1 / 3 / 2;
     box-shadow: 0 0 10px 1px black;
+    position: relative;
 }
+
+.toolbar ul {
+    position: relative;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    padding: 0;
+    height: 80vh;
+    overflow-y: scroll;
+    background-color: #141426;
+    outline: 10px ridge darkslategray;
+}
+
+.toolbar ul::-webkit-scrollbar {
+    background-color: rgb(48, 48, 48);
+    width: 7px;
+}
+
+.toolbar ul::-webkit-scrollbar-thumb {
+    background-color: green;
+    width: 11px;
+}
+
+@media (max-width: 90vh){
+    .toolbar {
+        grid-area: 2 / 1 / 3 / 3;
+        height: 120px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 15px;
+    }
+    .toolbar ul {
+        height: 90px;
+        width: 500px;
+        background-color: #141426;
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        justify-content: space-between;
+        outline: 8px ridge darkslategray;
+    }
+    .toolbar ul::-webkit-scrollbar {
+        background-color: rgb(48, 48, 48);
+        height: 7px;
+    }
+    
+    .toolbar ul::-webkit-scrollbar-thumb {
+        background-color: green;
+        height: 11px;
+    }
+    .toolbar ul *{
+        flex-shrink: 0;
+    }
+}
+

@@ -2,7 +2,7 @@
     font-family: 'Pixeleum';
     src: local('Pixeleum'),
          url('../../Fonts/pixeleum-48.ttf') format('truetype')
-  }
+}
 
 body {
     box-sizing: border-box;
@@ -28,4 +28,12 @@ body {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+    font-family:'Pixeleum';
+}
+
+@media (max-width: 90vh) {
+    .UI {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 6fr;
+    }
 }

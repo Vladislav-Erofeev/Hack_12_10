@@ -4,6 +4,8 @@ import {feedsReducer} from "./slices/feeds";
 import {authReducer} from "./slices/auth";
 import {fieldReducer} from "./slices/gameField";
 import {gameStatusReducer} from "./slices/gameStatus";
+import { gameToolsReducer } from './slices/tools';
+import { gameScoreReducer } from './slices/score';
 
 export default configureStore({
     reducer: {
@@ -11,6 +13,8 @@ export default configureStore({
         feeds: feedsReducer,
         auth: authReducer,
         field: fieldReducer,
-        game_status: gameStatusReducer
+        game_status: gameStatusReducer,
+        game_tools: gameToolsReducer,
+        game_score: gameScoreReducer
     }
 });
