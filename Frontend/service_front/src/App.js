@@ -31,9 +31,9 @@ function App() {
     const token = useSelector(selectToken)
 
     useEffect(() => {
-
-        dispatch(fetchUser(token))
-
+        if (token) {
+            dispatch(fetchUser(token))
+        }
     }, [token])
 
     return (
