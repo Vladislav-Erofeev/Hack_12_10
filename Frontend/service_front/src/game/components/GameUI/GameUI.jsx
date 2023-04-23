@@ -16,7 +16,7 @@ const GameUI = () => {
   const toMenu = () => {
     setStart(false)
   }
-
+  
   return (
     <div>
       {start

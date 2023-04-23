@@ -8,3 +8,9 @@
     padding: 0 30px;
     z-index: 1;
 }
+
+@media (max-width: 90vh){
+    .header {
+        grid-area: 1 / 1 / 2 / 3;
+    }
+}
