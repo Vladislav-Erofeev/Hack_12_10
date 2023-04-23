@@ -3,7 +3,7 @@ import FieldCell from '../../UI/FieldCell/FieldCell'
 import classes from './GamePlay.module.css'
 import PlayerCell from '../../UI/PlayerCell/PlayerCell'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCops, selectField, setCopsMoves, setField } from '../../../redux/slices/gameField'
+import {selectBackgroundField, selectCops, selectField, setCopsMoves, setField} from '../../../redux/slices/gameField'
 import GameOver from '../GameOver/GameOver'
 import { selectGameStatus, setGameOver } from '../../../redux/slices/gameStatus'
 import EnemyCell from '../../UI/EnemyCell/EnemyCell'
@@ -156,7 +156,7 @@ const GamePlay = () => {
         }
         else return
     }}>
-      <div className={classes.field} style={{position: "relative"}}>
+      <div className={classes.field} style={{position: "relative", backgroundColor:`url(http://194.58.119.86:8080/image${useSelector(selectBackgroundField)})`}}>
         {field.map((row, row_index) =>
           <div className={classes.row} key = {row_index}>{row.map((cell, index) => 
             <FieldCell key = {index} coords={{x: index, y: row_index}} value={cell} size={cellSize}/>
