@@ -8,6 +8,7 @@ import {
     get_received_friend_requests,
     get_sent_friend_requests
 } from "../requests";
+import "./Friends.css"
 
 const Friends = () => {
     const [rSelected, setRSelected] = useState("Друзья");
@@ -21,9 +22,9 @@ const Friends = () => {
 
     return (<div className="my-container">
         <div className="d-flex">
-            <h1 className="my-3">{rSelected}</h1>
-            <ButtonGroup className="ms-auto">
-                <Button outline
+            <h1 className="my-3 titel_one titel_one--media">{rSelected}</h1>
+            <ButtonGroup className="ms-auto align-items-center">
+                <Button className="btn-grp" outline
                         onClick={() => {
                             setRSelected("Друзья")
                             setActions({
@@ -38,7 +39,7 @@ const Friends = () => {
                 >
                     Друзья
                 </Button>
-                <Button outline
+                <Button className="btn-grp" outline
                         onClick={() => {
                             setRSelected("Исходящие")
                             setActions({
@@ -53,7 +54,7 @@ const Friends = () => {
                 >
                     Исходящие
                 </Button>
-                <Button outline
+                <Button className="btn-grp" outline
                         onClick={() => {
                             setRSelected("Входящие")
                             setActions({

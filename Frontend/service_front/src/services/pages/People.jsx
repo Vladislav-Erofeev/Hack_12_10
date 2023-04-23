@@ -10,7 +10,7 @@ const People = () => {
             <UserList
                 getUsers={get_all_users}
                 actionToUser1={send_friend_request}
-                nameAction1={"Добавить в друзья"}
+                nameAction1={"Добавить"}
             />
         </div>
     )

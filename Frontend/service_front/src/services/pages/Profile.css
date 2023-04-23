@@ -1,0 +1,9 @@
+.dop-info{
+    font-size: 20px !important;
+}
+
+@media (max-width: 550px) {
+    .dop-info{
+        font-size: 14px !important;
+    }
+}

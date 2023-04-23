@@ -21,22 +21,21 @@ const People = ({nameAction1, nameAction2, getUsers, actionToUser1, actionToUser
 
 
     return (
-        <div className="my-container">
+        <div>
             {users
-                ?
-                users.map(user => (
-                    <div className="d-flex my-4 align-items-center" key={user.id}>
+                ? users.map(user => (
+                    <div className="d-flex my-4 align-items-center"  key={user.id}>
                         <Person user={user}/>
                         <div className="d-flex justify-content-around flex-column ms-auto" style={{height:"100px"}}>
                             {actionToUser1 !== undefined
-                                ? <Button className="fs-5" color="success" onClick={event => {
+                                ? <Button className="my-btn btn-user" onClick={event => {
                                     event.preventDefault()
                                     actionToUser1(token, user.id)
                                 }}>{nameAction1}</Button>
                                 : <></>
                             }
                             {actionToUser2 !== undefined
-                                ? <Button className=" fs-5" color="danger" onClick={event => {
+                                ? <Button className="my-btn btn-user btn-deny" color="danger" onClick={event => {
                                     event.preventDefault()
                                     actionToUser2(token, user.id)
                                 }}>{nameAction2}</Button>
