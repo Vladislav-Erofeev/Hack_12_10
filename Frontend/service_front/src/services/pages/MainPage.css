@@ -11,11 +11,12 @@
 .info-banner-item{
     width: 325px;
     height: 400px;
-    background: url(/public/bg-card.jpg);
+    background: #F2F2F2 url("/public/bg-feeds.png") no-repeat;
     position: relative;
     box-shadow: 10px 10px 0px 0px #020202BF;
     border-radius: 5px;
     margin: 0 auto;
+    border: 5px solid #069BC5;
 }
 
 .info-banner-item img{
@@ -23,7 +24,7 @@
     position: absolute;
     width: 175px;
     height: 175px;
-    top: 26px;
+    top: 35px;
     left: calc(50% - 175px/2);
 }
 

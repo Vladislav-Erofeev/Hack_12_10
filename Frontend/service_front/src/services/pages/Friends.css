@@ -1,5 +1,4 @@
 .btn-grp{
-    font-size: 18px;
     border-radius: 0 !important;
 }
 .titel_one--media{
@@ -8,8 +7,8 @@
 
 @media (max-width: 550px) {
     .btn-grp{
-        font-size: 12px;
-        padding: 8px 5px;
+        font-size: 12px !important;
+        padding: 8px 5px !important;
     }
     .titel_one--media{
         font-size: 20px;

@@ -16,14 +16,14 @@ const Rating = () => {
     const [users, setUsers] = useState([])
 
     useEffect(() => {
-        get_top_ten(token).then(res => {
+        get_top_ten().then(res => {
             setUsers(res)
         })
-    }, [user])
+    }, [])
 
     useEffect(() => {
         if (user)
-            get_user_rating(token, user.id).then(res => {
+            get_user_rating(user.id).then(res => {
                 setRating(res)
             })
     }, [user])
@@ -35,7 +35,7 @@ const Rating = () => {
                 ?
                 users.map((user, index) => (
                     <div className="d-flex p-3 align-items-center"
-                         style={{background: rating === index + 1 ? '#fcc45c' : 'none'}} key={user.id}>
+                         style={{backgroundColor: rating === index + 1 ? '#fcc45c' : 'none'}} key={user.id}>
                         <h2 style={{width: "50px"}}>{index + 1}</h2>
                         <Person user={user}/>
                     </div>

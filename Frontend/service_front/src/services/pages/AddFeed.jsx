@@ -3,6 +3,7 @@ import {Button} from "reactstrap";
 import Cookies from "universal-cookie";
 import {add_feed, add_feed_image, url} from "../requests";
 import "./Register.css"
+import {useNavigate} from "react-router-dom";
 
 const AddFeedPage = () => {
 
@@ -12,7 +13,7 @@ const AddFeedPage = () => {
     const [feed, setFeed] = useState({
         body: ""
     })
-
+    const navigate = useNavigate()
     const addFeed = async () => {
         const res = await add_feed(token, feed)
         console.log(res)
@@ -42,6 +43,7 @@ const AddFeedPage = () => {
                 <Button className="my-btn fsss my-2" onClick={(event) => {
                     event.preventDefault()
                     addFeed()
+                    navigate("/profile")
                 }}>добавить</Button>
             </form>
         </div>
