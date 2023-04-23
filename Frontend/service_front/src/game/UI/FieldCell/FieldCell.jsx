@@ -52,7 +52,7 @@ const FieldCell = ({value, coords, size}) => {
   return (
     <div className={classes.cell} onClick={setToolToTile}
       style={{width: size, height: size, backgroundImage: `url(${bg})`}}
-    >{value}</div>
+    ></div>
   )
 }
 
