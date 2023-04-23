@@ -19,6 +19,7 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "universal-cookie": "^4.0.4",
+    "use-sound": "^4.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

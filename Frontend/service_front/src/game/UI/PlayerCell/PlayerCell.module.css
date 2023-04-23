@@ -1,10 +1,12 @@
 .player {
-    background-color: red;
     position: absolute;
-    width: 40px;
-    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.5s linear;
+    z-index: 1;
+    background-image: url(../../Assets/car_smol.png);
+    background-position: center;
+    background-size: 90% 100%;
+    background-repeat: no-repeat;
 }

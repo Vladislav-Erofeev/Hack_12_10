@@ -3,8 +3,11 @@ import GameScore from '../GameScore/GameScore'
 import Button from '../Button/Button'
 import classes from './GameHeader.module.css'
 import { useDispatch } from 'react-redux'
-import { setInitial } from '../../../redux/slices/gameField'
+import { setInitialField } from '../../../redux/slices/gameField'
 import { setGameOver } from '../../../redux/slices/gameStatus'
+import { setInitialTools } from '../../../redux/slices/tools'
+import useSound from 'use-sound'
+import { setScore } from '../../../redux/slices/score'
 
 const GameHeader = ({actions}) => {
 
@@ -17,11 +20,16 @@ const GameHeader = ({actions}) => {
         <GameScore score={999} highScore={9999}/>
         <div>
           <Button title="ЗАНОВО" styles={"pixel"} color={"green"} action={() => {
-            dispatch(setInitial())
+            dispatch(setInitialField())
             dispatch(setGameOver(false))
+            dispatch(setInitialTools())
+            dispatch(setScore({time: 0}))
           }}/>
           <Button title="В МЕНЮ" styles={"pixel"} color={"darkred"} action={() => {
-            dispatch(setInitial())
+            dispatch(setInitialField())
+            dispatch(setInitialTools())
+            dispatch(setGameOver(false))
+            dispatch(setScore({time: 0}))
             stop()
           }}/>
         </div>

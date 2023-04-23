@@ -1,0 +1,25 @@
+.tool {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+    align-items:flex-end;
+    margin: 10px;
+    transition: all 0.1s ease-in-out;
+    outline: 3px solid green;
+    cursor: pointer;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color: darkcyan;
+}
+
+.tool:hover {
+    filter: brightness(130%);
+}
+
+
+.sel {
+    outline: 3px solid darkred;
+    filter: brightness(80%);
+}

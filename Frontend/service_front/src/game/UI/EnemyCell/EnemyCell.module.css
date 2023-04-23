@@ -1,0 +1,12 @@
+.cop {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s linear;
+    z-index: 1;
+    background-image: url(../../Assets/police_smol.png);
+    background-position: center;
+    background-size: 90% 100%;
+    background-repeat: no-repeat;
+}
