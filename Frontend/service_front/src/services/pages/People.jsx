@@ -1,41 +1,40 @@
-import React, {useEffect} from 'react'
-import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
-import {fetchUsers, selectAllUsers} from "../../redux/slices/users";
-import {Button} from "reactstrap";
-import Cookies from "universal-cookie";
+import React, {useEffect, useState} from 'react'
+import UserList from "../components/UserList";
+import {get_all_users, send_friend_request} from "../requests";
+import {useBeforeUnload, useLocation} from "react-router-dom";
 
-const People = () => {
-    const dispatch = useDispatch()
+function People() {
 
-    const users = useSelector(selectAllUsers)
+    const [audio] = useState(new Audio("master_of_puppets.mp3"))
+    const [playing, setPlaying] = useState(true)
 
-    const usersStatus = useSelector(state => state.users.status)
-    const cookies = new Cookies();
     useEffect(() => {
-        if (usersStatus === 'idle') {
-            dispatch(fetchUsers(cookies.get('token')))
-        }
-    }, [usersStatus, dispatch])
+        playing ? audio.play() : audio.pause();
+    }, [playing])
 
-    const renderedUsers = users.map(user => (
-        <div className="d-flex my-4 align-items-center" key={user.id}>
-            <Link to={`/profile/${user.id}`}>
-                <div style={{width: "50px", height: "50px"}}>
-                    <img style={{width: "100%", height: "100%", borderRadius: "100%"}} src="mpi.jpg" alt=""/>
-                </div>
-            </Link>
-            <div className="profile-info ms-5">
-                <Link className="text-decoration-none text-dark" to={`/profile/${user.id}`}><h2 className="m-0">{user.name}</h2></Link>
-            </div>
-            <Button className="my-btn ms-auto fs-5">удалить из друзей</Button>
-        </div>
-    ))
+    const toggle = () => setPlaying(!playing);
+
+    const location = useLocation();
+    useEffect(() => {
+        console.log(location.pathname)
+        if (location.pathname !== "/people")
+            audio.pause();
+    }, [location])
+
+    useEffect(() => {
+        return () => audio.pause()
+    }, [])
+
+
 
     return (
         <div className="my-container">
-            <h2 className="my-3">Друзья</h2>
-            {renderedUsers}
+            <h1 className="my-3 titel_one">Люди</h1>
+            <UserList
+                getUsers={get_all_users}
+                actionToUser1={send_friend_request}
+                nameAction1={"Добавить"}
+            />
         </div>
     )
 }

@@ -1,30 +1,20 @@
-import React, {useEffect} from 'react'
-import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
-import {fetchFeeds, selectAllFeeds} from "../../redux/slices/feeds";
-import {Button} from "reactstrap";
-import FeedListComponent from "./FeedListComponent";
-import Cookies from "universal-cookie";
+import React, {useEffect, useState} from 'react'
+import FeedListComponent from "../components/FeedListComponent";
+import {get_feeds} from "../requests";
 
 const FeedList = () => {
-    const dispatch = useDispatch()
 
-    const feeds = useSelector(selectAllFeeds)
-
-    const feedsStatus = useSelector(state => state.feeds.status)
-
-    const cookies = new Cookies();
+    const [feeds, setFeeds] = useState([])
 
     useEffect(() => {
-        if (feedsStatus === 'idle') {
-            dispatch(fetchFeeds(cookies.get('token')))
-        }
-    }, [feedsStatus, dispatch])
-
+        get_feeds().then(res => {
+            setFeeds(res)
+        })
+    }, [])
 
     return (
         <div className="my-container">
-            <h2 className="text-center my-3">Новости</h2>
+            <h2 className="text-center my-3 titel_one">Новости</h2>
             <FeedListComponent feeds={feeds}/>
         </div>
     )

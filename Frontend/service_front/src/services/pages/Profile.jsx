@@ -1,17 +1,48 @@
+import React, {useEffect, useState} from 'react'
+import {Link, useNavigate, useParams} from "react-router-dom";
+import FeedListComponent from "../components/FeedListComponent";
+import {get_user, get_user_feeds, get_user_rating, url} from "../requests";
+import {useDispatch, useSelector} from "react-redux";
+import {logout, selectToken} from "../../redux/slices/security";
+import {Button} from "reactstrap";
 import "./Profile.css"
-import React from 'react'
-import {useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
-import {selectUserById} from "../../redux/slices/users";
-import {selectAllFeeds} from "../../redux/slices/feeds";
-import FeedListComponent from "./FeedListComponent";
+import {selectUser} from "../../redux/slices/user";
 
 
 const Profile = () => {
     const {userId} = useParams();
 
-    const user = useSelector(state => selectUserById(state, userId))
-    const feeds = useSelector(selectAllFeeds)
+    const navigate = useNavigate();
+
+    const dispatch = useDispatch()
+
+    const [user, setUser] = useState(null)
+
+    const [rating, setRating] = useState(null)
+
+    const [feeds, setFeeds] = useState([])
+
+    const curUser = useSelector(selectUser)
+
+    useEffect(() => {
+        get_user(userId).then(res => {
+            setUser(res)
+        })
+    }, [])
+
+    useEffect(() => {
+        if (user)
+            get_user_feeds(user.id).then(res => {
+                setFeeds(res)
+            })
+    }, [user])
+
+    useEffect(() => {
+        if (user)
+            get_user_rating(user.id).then(res => {
+                setRating(res)
+            })
+    }, [user])
 
     if (!user) {
         return (
@@ -22,17 +53,41 @@ const Profile = () => {
     }
 
 
-
     return (
         <div className="my-container">
-            <div className="d-flex my-4">
+            <div className="d-flex mb-3 pb-3 border-bottom border-primary border-3">
                 <div className="profile-avatar">
-                    <img style={{width: "100%", height: "100%", borderRadius: "100%"}} src="mpi.jpg" alt=""/>
+                    <img className="profile-img"
+                         src={user.url === null
+                             ? "https://i.stack.imgur.com/U9zFC.png?s=192&g=1"
+                             : `${url}/image${user.url}`
+                         } alt=""/>
                 </div>
-                <div className="profile-info ms-5">
-                    <h1 className="mb-3">{user.username}</h1>
-                    <h3 className="m-0">Лучший результат {user.bestScore}</h3>
+                <div className="d-flex flex-column justify-content-between flex-grow-1 ms-auto">
+                    <div className="d-flex justify-content-between  mt-2">
+                        <h1 className="titel_one titel_one--media m-0">{user.name}</h1>
+                        {curUser.id === user.id
+                            ?<Button className="my-btn btn-user" onClick={event => {
+                                event.preventDefault()
+                                dispatch(logout())
+                                navigate("/")
+                                window.location.reload();
+                            }}>Выйти</Button>
+                            :<></>
+                        }
+                    </div>
+                    <div className="align-self-center">
+                        <h3 className="mb-3 dop-info">Лучший результат {user.bestScore}</h3>
+                        <h3 className="m-0 dop-info">Место в рейтинге {rating}</h3>
+                    </div>
                 </div>
+            </div>
+            <div className="m-3 d-flex align-items-center">
+                <h1 className="m-0 titel_one titel_one--media">Посты</h1>
+                {curUser.id === user.id
+                    ? <Button className="ms-auto my-btn btn-user" to="/add_feed" tag={Link}>Новая запись</Button>
+                    : <></>
+                }
             </div>
             <FeedListComponent feeds={feeds}/>
         </div>

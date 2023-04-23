@@ -28,8 +28,8 @@ public class ImageController {
     private final FeedService feedService;
     private final FeedImageService feedImageService;
     private final AuthenticatedPersonService authenticatedPersonService;
-    private final String UPLOAD_DIRECTORY = "C:/images/";
-//    private final String UPLOAD_DIRECTORY = "/images/"; // в docker
+    private final String UPLOAD_DIRECTORY = "/images"; // в docker
+//    private final String UPLOAD_DIRECTORY = "C:/images"; // на локалке
 
     /**
      * POST - "/person_image/add"

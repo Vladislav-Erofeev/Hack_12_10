@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import tft.GameBackend.dto.NewScoreDTO;
 import tft.GameBackend.dto.ScoreDTO;
 import tft.GameBackend.entities.Person;
+import tft.GameBackend.entities.Score;
 import tft.GameBackend.errors.PersonNotFoundException;
 import tft.GameBackend.mappers.ScoreMapper;
 import tft.GameBackend.services.ScoreService;
@@ -21,6 +22,13 @@ public class StatisticController {
     private final ScoreService scoreService;
     private final ScoreMapper scoreMapper = ScoreMapper.INSTANCE;
     private final AuthenticatedPersonService authenticatedPersonService;
+
+    @GetMapping()
+    public List<Score> getStats() { // не маплю для проверки работы метода резов недельной давности
+        return scoreService.findAll();
+//                .stream()
+//                .map(scoreMapper::scoreToScoreDTO).collect(Collectors.toList());
+    }
 
     /**
      * GET - "/stats/{id}"
@@ -45,7 +53,7 @@ public class StatisticController {
      * Уставноление счета пользователя
      *
      * @param newScoreDTO - Объект сущности вида {
-     *                    "body": содержание поста
+     *                    "score": счет пользователя
      *                    }
      * @throws PersonNotFoundException
      */
@@ -53,7 +61,6 @@ public class StatisticController {
     @PostMapping("/setScore")
     public void setPersonsScore(@RequestBody NewScoreDTO newScoreDTO) throws PersonNotFoundException {
         Person person = authenticatedPersonService.getAuthenticatedPerson();
-        System.out.println(newScoreDTO.getScore());
         if (person.getBestScore() < newScoreDTO.getScore()) {
             scoreService.setBestScoreById(person.getId(), newScoreDTO.getScore());
             scoreService.addScoreById(person.getId(), newScoreDTO.getScore());
@@ -73,5 +80,24 @@ public class StatisticController {
         return scoreService.findStatsByPersonId(id).stream()
                 .map(scoreMapper::scoreToScoreDTO).collect(Collectors.toList());
     }
+
+    /**
+     * GET - "/getLastWeekResults"
+     * Получение статистики пользователя за неделю
+     *
+     * @return список результатов пользователя в формате {
+     * "score": {
+     * "id": id пользователя,
+     * "score": счет пользователя
+     * }
+     */
+
+    @GetMapping("/getLastWeekResults")
+    public List<ScoreDTO> getLastWeekResults() {
+        Person person = authenticatedPersonService.getAuthenticatedPerson();
+        return scoreService.getScoresForLastWeekForPerson(person).stream()
+                .map(scoreMapper::scoreToScoreDTO).collect(Collectors.toList());
+    }
+
 
 }
