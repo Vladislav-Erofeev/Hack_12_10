@@ -14,11 +14,14 @@ const PrivateRoute = () => {
         if (token) {
             dispatch(fetchUser(token))
         }
-    }, [userStatus])
+    }, [])
 
     let content
 
-    if (userStatus === "succeeded") {
+    if (userStatus === "loading") {
+        content = <Spin text="Loading..."></Spin>
+    } else if (userStatus === "succeeded") {
+        // user is not authenticated
         content = <Navigate to={`/user/${user.id}`}/>;
     } else {
         content = <Navigate to="/login"/>;
