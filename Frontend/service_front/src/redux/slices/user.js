@@ -1,10 +1,11 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
 import {useDispatch} from "react-redux";
+import {url} from "../../services/requests";
 
 export const fetchUser = createAsyncThunk("profile/fetchUser",
     async (token) => {
-        const response = await axios.get("http://localhost:8080/person",
+        const response = await axios.get(`${url}/person`,
             {
                 headers: {
                     "access-control-allow-origin": "http://localhost:3000",

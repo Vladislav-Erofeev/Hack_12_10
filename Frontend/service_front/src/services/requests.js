@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const url = "http://localhost:8080"
+export const url = "http://194.58.119.86:8080"
 
 export async function login(info) {
     let data
@@ -15,7 +15,6 @@ export async function get_feed(token, feedId) {
     await axios.get(`${url}/feed/${feedId}`,
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
                 "Authorization": `Bearer ${token}`,
             }
         }).then(res => {
@@ -29,7 +28,6 @@ export async function get_feeds(token) {
     await axios.get(`${url}/feed`,
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
                 "Authorization": `Bearer ${token}`,
             }
         }).then(res => {
@@ -43,7 +41,6 @@ export async function add_feed(token, feed) {
     await axios.post(`${url}/feed/add`, feed,
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
                 "Authorization": `Bearer ${token}`,
             }
         }).then(res => data = res.data)
@@ -54,7 +51,7 @@ export async function add_feed_image(token, feedId, formData) {
     await axios.post(`${url}/feed_image/add/${feedId}`, formData,
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
+                
                 "Authorization": `Bearer ${token}`,
             }
         }
@@ -70,7 +67,7 @@ export async function get_all_users(token) {
     await axios.get(`${url}/person/all`,
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
+                
                 "Authorization": `Bearer ${token}`,
             }
         }).then(res => {
@@ -86,7 +83,7 @@ export async function send_friend_request(token, userId) {
     await axios.post(`${url}/friends/send_request/${userId}`, {},
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
+                
                 "Authorization": `Bearer ${token}`,
             }
         }
@@ -100,7 +97,7 @@ export async function get_friends(token) {
     await axios.get(`${url}/friends`,
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
+                
                 "Authorization": `Bearer ${token}`,
             }
         }).then(res => {
@@ -113,7 +110,7 @@ export async function delete_friend(token, userId) {
     await axios.delete(`${url}/friends/delete/${userId}`,
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
+                
                 "Authorization": `Bearer ${token}`,
             }
         })
@@ -124,7 +121,7 @@ export async function get_sent_friend_requests(token) {
     await axios.get(`${url}/friends/sent_requests`,
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
+                
                 "Authorization": `Bearer ${token}`,
             }
         }).then(res => {
@@ -138,7 +135,7 @@ export async function get_received_friend_requests(token) {
     await axios.get(`${url}/friends/received_requests`,
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
+                
                 "Authorization": `Bearer ${token}`,
             }
         }).then(res => {
@@ -153,7 +150,7 @@ export async function accept_friend_request(token, userId) {
     await axios.post(`${url}/friends/friend_request/${userId}`, {},
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
+                
                 "Authorization": `Bearer ${token}`,
             }
         }
@@ -168,7 +165,7 @@ export async function deny_friend_request(token, userId) {
     await axios.delete(`${url}/friends/friend_request/${userId}`,
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
+                
                 "Authorization": `Bearer ${token}`,
             }
         }
@@ -179,7 +176,7 @@ export async function cancel_friend_request(token, userId) {
     await axios.delete(`${url}/friends/cancel_request/${userId}`,
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
+                
                 "Authorization": `Bearer ${token}`,
             }
         }
@@ -191,7 +188,7 @@ export async function get_top_ten(token) {
     await axios.get(`${url}/person/getTopTen`,
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
+                
                 "Authorization": `Bearer ${token}`,
             }
         }).then(res => {
@@ -207,7 +204,7 @@ export async function get_user(token, userId) {
     await axios.get(`${url}/person/${userId}`,
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
+                
                 "Authorization": `Bearer ${token}`,
             }
         }).then(res => {
@@ -222,7 +219,7 @@ export async function get_user_feeds(token, userId) {
     await axios.get(`${url}/feed/person/${userId}`,
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
+                
                 "Authorization": `Bearer ${token}`,
             }
         }).then(res => {
@@ -237,7 +234,7 @@ export async function get_user_rating(token, userId) {
     await axios.get(`${url}/person/getRatingPosition/${userId}`,
         {
             headers: {
-                "access-control-allow-origin": "http://localhost:3000",
+                
                 "Authorization": `Bearer ${token}`,
             }
         }).then(res => {

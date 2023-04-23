@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import {Button} from "reactstrap";
-import axios from "axios";
 import Cookies from "universal-cookie";
 import {add_feed, add_feed_image, url} from "../requests";
+import "./Register.css"
 
 const AddFeedPage = () => {
 
@@ -24,18 +24,22 @@ const AddFeedPage = () => {
     }
 
     return (
-        <div style={{margin: "0 auto", maxWidth: "500px"}}>
-            <h1>Добавление поста</h1>
+        <div className="my-container">
+            <h1 className="titel_one my-3">Добавление поста</h1>
             <form>
-                <h2>Текст поста</h2>
-                <input className="d-block" type="text" required onChange={(event) => {
-                    setFeed({body: event.target.value})
-                }}/>
-                <h2>Фотографии поста</h2>
-                <input className="d-block" type="file" required onChange={(event) => {
-                    setFile(event.target.files[0])
-                }}/>
-                <Button onClick={(event) => {
+                <label>
+                    <p>Текст поста</p>
+                    <input type="text" required onChange={(event) => {
+                        setFeed({body: event.target.value})
+                    }}/>
+                </label>
+                <label>
+                    <p>Фотографии поста</p>
+                    <input type="file" required onChange={(event) => {
+                        setFile(event.target.files[0])
+                    }}/>
+                </label>
+                <Button className="my-btn fsss my-2" onClick={(event) => {
                     event.preventDefault()
                     addFeed()
                 }}>добавить</Button>

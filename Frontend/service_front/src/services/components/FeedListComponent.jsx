@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 import "./FeedListComponent.css"
+import {url} from "../requests";
 
 const FeedListComponent = ({feeds}) => {
 
@@ -19,7 +20,7 @@ const FeedListComponent = ({feeds}) => {
                     <img className="user-img"
                          src={feed.author.url === null
                              ? "https://i.stack.imgur.com/U9zFC.png?s=192&g=1"
-                             : `http://localhost:8080/image${feed.author.url}`
+                             : `${url}/image${feed.author.url}`
                          } alt=""/>
                 </Link>
                 <Link className="text-decoration-none text-dark profile-info ms-4" to={`/user/${feed.author.id}`}>
@@ -29,7 +30,7 @@ const FeedListComponent = ({feeds}) => {
             <div>
                 <p className="user-descr">{feed.body}</p>
                 <Link to={`/feeds/${feed.id}`} className="user-descr-img"><img
-                    src={`http://localhost:8080/image${feed.images[0].url}`}
+                    src={`${url}/image${feed.images[0].url}`}
                     width="100%" alt=""/></Link>
             </div>
         </div>

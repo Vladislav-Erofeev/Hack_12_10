@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {Link, useParams} from "react-router-dom";
-import {get_feed} from "../requests";
+import {get_feed, url} from "../requests";
 import {useSelector} from "react-redux";
 import {selectToken} from "../../redux/slices/security";
 import CustomCarousel from "../components/CustomCarousel";
@@ -35,7 +35,7 @@ const Feed = () => {
                     <img style={{width: "100%", height: "100%", borderRadius: "100%"}}
                          src={feed.author.url === null
                              ? "https://i.stack.imgur.com/U9zFC.png?s=192&g=1"
-                             : `http://localhost:8080/image${feed.author.url}`
+                             : `${url}/image${feed.author.url}`
                          }/>
                 </Link>
                 <Link className="profile-info ms-5 text-decoration-none text-dark" to={`/user/${feed.author.id}`}>

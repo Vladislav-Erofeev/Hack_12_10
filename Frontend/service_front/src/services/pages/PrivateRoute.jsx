@@ -18,7 +18,7 @@ const PrivateRoute = () => {
 
     let content
 
-    if (userStatus === "loading") {
+    if (userStatus === "loading" || userStatus === "idle") {
         content = <Spin text="Loading..."></Spin>
     } else if (userStatus === "succeeded") {
         // user is not authenticated
