@@ -10,7 +10,7 @@ const StartMenu = ({actions, toggle, playing}) => {
     const [starter] = useSound('../../Audio/creeping_death.mp3')
     return (
         <div className={classes.menu}>
-            <h1>SomeGAMEname</h1>
+            <h1>12/10 StreetRacing</h1>
             <div className={classes.menubar}>
                 <Button title="ИГРАТЬ" styles="pixel" color="green" action={() => {
                     start()
