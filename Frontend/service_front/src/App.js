@@ -10,7 +10,7 @@ import Feed from "./services/pages/Feed";
 import Login from "./services/pages/Login";
 import Register from "./services/pages/Register";
 import PrivateRoute from "./services/pages/PrivateRoute";
-import AddFeed from "./services/components/AddFeed";
+import AddFeed from "./services/pages/AddFeed";
 import GameUI from './game/components/GameUI/GameUI';
 import Friends from "./services/pages/Friends";
 import {useDispatch, useSelector} from "react-redux";
@@ -18,6 +18,8 @@ import {fetchUser} from "./redux/slices/user";
 import {useEffect} from "react";
 import Rating from "./services/pages/Rating";
 import {getCookies, selectToken} from "./redux/slices/security";
+import WrapComponent from "./services/components/WrapComponent";
+
 
 function App() {
     const dispatch = useDispatch()
@@ -29,29 +31,29 @@ function App() {
     const token = useSelector(selectToken)
 
     useEffect(() => {
-        if (token){
-            dispatch(fetchUser(token))
-        }
+
+        dispatch(fetchUser(token))
+
     }, [token])
 
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<div className='megaconteiner'><NavBar/><MainPage style={{color: 'red'}}/><Footer/></div>}/>
+                <Route path='/' element={<WrapComponent><MainPage/></WrapComponent>}/>
 
-                <Route path='/people' element={<div className='megaconteiner'><NavBar/><People/><Footer/></div>}/>
-                <Route path='/friends' element={<div className='megaconteiner'><NavBar/><Friends/><Footer/></div>}/>
+                <Route path='/people' element={<WrapComponent><People/></WrapComponent>}/>
+                <Route path='/friends' element={<WrapComponent><Friends/></WrapComponent>}/>
                 <Route path="/profile" element={<PrivateRoute/>}/>
-                <Route path="/user/:userId" element={<div className='megaconteiner'><NavBar/><Profile/><Footer/></div>}/>
+                <Route path="/user/:userId" element={<WrapComponent><Profile/></WrapComponent>}/>
 
-                <Route path='/login' element={<div className='megaconteiner'><NavBar/><Login/></div>}/>
-                <Route path='/registration' element={<div className='megaconteiner'><NavBar/><Register/><Footer/></div>}/>
+                <Route path='/login' element={<WrapComponent><Login/></WrapComponent>}/>
+                <Route path='/registration' element={<WrapComponent><Register/></WrapComponent>}/>
 
-                <Route path='/feeds' element={<div className='megaconteiner'><NavBar/><FeedList/><Footer/></div>}/>
-                <Route path='/feeds/:feedId' element={<div className='megaconteiner'><NavBar/><Feed/><Footer/></div>}/>
-                <Route path='/add_feed' element={<div className='megaconteiner'><NavBar/><AddFeed/><Footer/></div>}/>
+                <Route path='/feeds' element={<WrapComponent><FeedList/></WrapComponent>}/>
+                <Route path='/feeds/:feedId' element={<WrapComponent><Feed/></WrapComponent>}/>
+                <Route path='/add_feed' element={<WrapComponent><AddFeed/></WrapComponent>}/>
 
-                <Route path='/rating' element={<div className='megaconteiner'><NavBar/><Rating/><Footer/></div>}/>
+                <Route path='/rating' element={<WrapComponent><Rating/></WrapComponent>}/>
 
                 <Route path='/game' element={<GameUI/>}/>
             </Routes>

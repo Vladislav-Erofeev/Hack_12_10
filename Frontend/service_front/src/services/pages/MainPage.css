@@ -1,0 +1,50 @@
+
+
+.info-banner-item {
+    width: 30%;
+}
+
+@media (max-width: 600px) {
+    .info-banner-item h2 {
+        font-size: 20px;
+    }
+
+    .info-banner-item h3 {
+        font-size: 16px;
+    }
+}
+
+.info-banner-item{
+    width: 325px;
+    height: 400px;
+    background: url(/public/bg-card.jpg);
+    position: relative;
+    box-shadow: 10px 10px 0px 0px #020202BF;
+    border-radius: 5px;
+}
+
+.info-banner-item img{
+    display: block;
+    position: absolute;
+    width: 175px;
+    height: 175px;
+    top: 26px;
+    left: calc(50% - 175px/2);
+}
+
+.info-banner-item h2{
+    position: absolute;
+    top: 220px;
+    font-family: 'Press Start 2P';
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+}
+.info-banner-item h3{
+    position: absolute;
+    top: 270px;
+    font-family: 'Play';
+    font-size: 16px;
+    padding: 0 22px;
+    text-align: left;
+}

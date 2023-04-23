@@ -7,8 +7,8 @@ import {
     NavLink,
 } from "reactstrap";
 import { NavLink as Li } from 'react-router-dom';
-
 import React, {useState} from "react";
+import "./NavBar.css"
 
 
 function NavBar() {
@@ -18,7 +18,7 @@ function NavBar() {
 
     return (
         <div className="header" style={{background: "#0699c2"}}>
-            <Navbar expand="md" dark className="fs-5 my-container py-5">
+            <Navbar expand="lg" dark className="my-container">
                 <Nav navbar>
                     <NavItem>
                         <NavLink to="/" tag={Li}>Главная</NavLink>

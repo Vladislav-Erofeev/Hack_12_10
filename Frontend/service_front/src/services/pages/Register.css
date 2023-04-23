@@ -1,0 +1,70 @@
+form {
+    background-color: #E74286;
+    border: 5px solid #F2F2F2;
+    box-shadow: 10px 10px 0px 0px #000000BF;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 50px;
+    width: 60%;
+    margin: 0 auto 20px;
+}
+
+label {
+    font-family: 'Press Start 2P';
+    color: #F2F2F2;
+    text-shadow: 2px 0 2px #020202,
+    0 2px 2px #020202,
+    -2px 0 2px #020202,
+    0 -2px 2px #020202;
+    padding: 10px 0;
+}
+
+input:not([type='file']) {
+    box-shadow: 2px 2px 5px 1px #000000 inset;
+    display: block;
+    background-color: #F2F2F2;
+    border: 2px solid #020202;
+    font-family: 'Play';
+    padding: 5px 5px 5px 12px;
+    width: 100%;
+}
+
+.cont-form__link {
+    font-family: 'Press Start 2P';
+    text-align: center;
+    color: #020202;
+    font-size: 12px;
+    margin-top: 10px;
+    text-decoration: none;
+    text-shadow: 2px 0 2px #F2F2F2,
+    0 2px 2px #F2F2F2,
+    -2px 0 2px #F2F2F2,
+    0 -2px 2px #F2F2F2;
+}
+
+p{
+    font-size: 12px;
+    margin-bottom: 5px !important;
+}
+
+.fsss {
+    font-size: 12px !important;
+}
+input[type='file'] {
+    font-size: 12px !important;
+}
+
+@media (max-width: 800px) {
+    form {
+        width: 95%;
+    }
+}
+
+@media (max-width: 510px) {
+    form {
+        padding: 10px 20px;
+    }
+    input[type='file'] {
+        font-size: 9px !important;
+    }
+}

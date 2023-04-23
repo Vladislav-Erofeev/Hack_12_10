@@ -1,0 +1,18 @@
+.person-img{
+    width: 100px;
+    height: 100px;
+}
+
+.btn-user{
+    font-size: 16px!important;
+}
+
+@media (max-width: 550px) {
+    .person-img{
+        width: 75px;
+        height: 75px;
+    }
+    .btn-user{
+        font-size: 10px!important;
+    }
+}

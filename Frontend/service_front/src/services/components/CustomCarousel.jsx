@@ -5,6 +5,8 @@ import {
     CarouselControl,
     CarouselIndicators,
 } from 'reactstrap';
+import "./CustomCarousel.css"
+import {url} from "../requests";
 
 
 function CustomCarousel({images}) {
@@ -37,7 +39,7 @@ function CustomCarousel({images}) {
             >
                 <div className="d-flex img-carousel" style={{}}>
                     <img style={{objectFit:"cover", margin: "0 auto", maxWidth:"100%"}}
-                         src={`http://localhost:8080/image${image.url}`}/>
+                         src={`${url}/image${image.url}`}/>
                 </div>
 
             </CarouselItem>

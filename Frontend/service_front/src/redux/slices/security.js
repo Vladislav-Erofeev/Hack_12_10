@@ -2,21 +2,25 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import Cookies from 'universal-cookie'
 import axios from "axios";
 import jwt from "jwt-decode";
+import {login, url} from "../../services/requests";
 
 const cookies = new Cookies()
 
 
+
 export const auth = createAsyncThunk("security/auth",
     async (info) => {
-        const {data} = await axios.post("http://localhost:8080/login", info)
-        const decoded = jwt(data.token)
-        cookies.set('token', data.token, {path: '/', expires: new Date(Date.now() + decoded.exp)})
-        return data.token
+        let data
+        await login(info).then(res => data = res)
+        console.log(data)
+        const decoded = jwt(data)
+        cookies.set('token', data, {path: '/', expires: new Date(Date.now() + decoded.exp)})
+        return data
     })
 
 export const reg = createAsyncThunk("security/reg",
     async (info) => {
-        const {data} = await axios.post("http://localhost:8080/registration", info)
+        const {data} = await axios.post(`${url}/registration`, info)
         const decoded = jwt(data.token)
         cookies.set('token', data.token, {path: '/', expires: new Date(Date.now() + decoded.exp)})
         return data.token
