@@ -18,10 +18,7 @@ const PrivateRoute = () => {
 
     let content
 
-    if (userStatus === "loading" || userStatus === "idle") {
-        content = <Spin text="Loading..."></Spin>
-    } else if (userStatus === "succeeded") {
-        // user is not authenticated
+    if (userStatus === "succeeded") {
         content = <Navigate to={`/user/${user.id}`}/>;
     } else {
         content = <Navigate to="/login"/>;
