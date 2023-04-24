@@ -1,15 +1,19 @@
 import React, {useEffect, useState} from 'react'
 import {Link, useParams} from "react-router-dom";
-import {get_feed, url} from "../requests";
+import {delete_feed, get_feed, url} from "../requests";
 import {useSelector} from "react-redux";
 import {selectToken} from "../../redux/slices/security";
 import CustomCarousel from "../components/CustomCarousel";
+import {Button} from "reactstrap";
+import {selectUser} from "../../redux/slices/user";
 
 
 const Feed = () => {
     const {feedId} = useParams();
 
     const token = useSelector(selectToken)
+
+    const user = useSelector(selectUser)
 
     const [feed, setFeed] = useState(null)
 
@@ -44,6 +48,16 @@ const Feed = () => {
             <div>
                 <p>{feed.body}</p>
                 <CustomCarousel images={feed.images}/>
+            </div>
+            <div>
+                {
+                    user.id === feed.author.id
+                        ? <Button className="ms-auto my-btn btn-user" onClick={event => {
+                            event.preventDefault()
+                            delete_feed(token, feedId)
+                        }}>Удалить</Button>
+                        : <></>
+                }
             </div>
         </div>
     )
