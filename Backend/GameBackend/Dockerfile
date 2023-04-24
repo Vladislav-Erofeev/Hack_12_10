@@ -1,4 +1,4 @@
 FROM openjdk:17
-ADD /target/GameBackend-0.0.2-SNAPSHOT.jar application.jar
+ADD ./GameBackend-1.0.0-SNAPSHOT.jar application.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "application.jar"]
