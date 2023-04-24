@@ -24,6 +24,15 @@ const Profile = () => {
 
     const curUser = useSelector(selectUser)
 
+    const [curUserId, setCurUserId] = useState(0)
+
+    useEffect(()=>{
+        if (curUser)
+            setCurUserId(curUser.id)
+        else
+            setCurUserId(0)
+    },[curUser])
+
     useEffect(() => {
         get_user(userId).then(res => {
             setUser(res)
@@ -53,6 +62,8 @@ const Profile = () => {
     }
 
 
+
+
     return (
         <div className="my-container">
             <div className="d-flex mb-3 pb-3 border-bottom border-primary border-3">
@@ -66,7 +77,7 @@ const Profile = () => {
                 <div className="d-flex flex-column justify-content-between flex-grow-1 ms-auto">
                     <div className="d-flex justify-content-between  mt-2">
                         <h1 className="titel_one titel_one--media m-0">{user.name}</h1>
-                        {curUser.id === user.id
+                        {curUserId === user.id
                             ?<Button className="my-btn btn-user" onClick={event => {
                                 event.preventDefault()
                                 dispatch(logout())
@@ -84,7 +95,7 @@ const Profile = () => {
             </div>
             <div className="m-3 d-flex align-items-center">
                 <h1 className="m-0 titel_one titel_one--media">Посты</h1>
-                {curUser.id === user.id
+                {curUserId === user.id
                     ? <Button className="ms-auto my-btn btn-user" to="/add_feed" tag={Link}>Новая запись</Button>
                     : <></>
                 }

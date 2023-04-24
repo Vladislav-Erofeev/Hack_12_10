@@ -4,7 +4,6 @@ import GameHeader from '../../UI/GameHeader/GameHeader'
 import classes from './GameUI.module.css'
 import GamePlay from '../GamePlay/GamePlay'
 import StartMenu from '../StartMenu/StartMenu'
-import {useLocation} from "react-router-dom";
 
 const GameUI = () => {
 
@@ -18,7 +17,7 @@ const GameUI = () => {
         setStart(false)
     }
 
-    const [audio] = useState(new Audio("fade_to_black.mp3"))
+    const [audio, setAudio] = useState(new Audio("fade_to_black.mp3"))
     const [playing, setPlaying] = useState(false)
 
     useEffect(() => {
@@ -27,12 +26,16 @@ const GameUI = () => {
 
     const toggle = () => setPlaying(!playing);
 
-    const location = useLocation();
     useEffect(() => {
-        console.log(location.pathname)
-        if (location.pathname !== "/game")
-            audio.pause();
-    }, [location])
+        audio.pause();
+        console.log(start)
+        if (start){
+            setAudio(new Audio("master_of_puppets.mp3"))
+        }
+        else{
+            setAudio(new Audio("fade_to_black.mp3"))
+        }
+    }, [start])
 
     useEffect(() => {
         return () => audio.pause()
@@ -47,7 +50,6 @@ const GameUI = () => {
                     <GamePlay/>
                 </div>
                 : <StartMenu actions={startGame} toggle={toggle} playing={playing}/>
-
             }
         </div>
     )
