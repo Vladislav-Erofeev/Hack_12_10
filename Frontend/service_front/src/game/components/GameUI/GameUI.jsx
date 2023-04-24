@@ -27,17 +27,6 @@ const GameUI = () => {
     const toggle = () => setPlaying(!playing);
 
     useEffect(() => {
-        audio.pause();
-        console.log(start)
-        if (start){
-            setAudio(new Audio("master_of_puppets.mp3"))
-        }
-        else{
-            setAudio(new Audio("fade_to_black.mp3"))
-        }
-    }, [start])
-
-    useEffect(() => {
         return () => audio.pause()
     }, [])
 
