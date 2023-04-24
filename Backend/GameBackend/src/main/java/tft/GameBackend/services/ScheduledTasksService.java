@@ -21,7 +21,7 @@ public class ScheduledTasksService {
         Session session = entityManager.unwrap(Session.class);
 
         System.out.println("scheduled task: delete from friend_request overdue requests");
-        Query query = session.createQuery("delete from friend_request where exp_date < current_date");
+        Query query = session.createQuery("delete from FriendRequest where expDate < current_date");
         query.executeUpdate();
     }
 }

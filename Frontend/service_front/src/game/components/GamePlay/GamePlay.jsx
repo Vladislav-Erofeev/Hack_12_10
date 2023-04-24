@@ -21,7 +21,7 @@ const GamePlay = () => {
 
   useEffect(() => {
     dispatch(fetchField())
-  }, [])
+  }, [gameOver])
 
   const {field, coords} = useSelector(selectField)
 

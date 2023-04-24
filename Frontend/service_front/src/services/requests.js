@@ -36,6 +36,14 @@ export async function add_feed(token, feed) {
     return data
 }
 
+export async function delete_feed(token, feedId) {
+    await axios.delete(`${url}/feed/delete/${feedId}`, {
+        headers: {
+            "Authorization": `Bearer ${token}`,
+        }
+    })
+}
+
 export async function add_feed_image(token, feedId, formData) {
     await axios.post(`${url}/feed_image/add/${feedId}`, formData, {
         headers: {

@@ -28,8 +28,8 @@ public class SecurityConfiguration {
                 .requestMatchers("/feed/add", "/feed/edit/**", "/feed/delete/**", "/friends/**", "/level/add",
                         "/level/delete/**", "/stats/setScore")
                 .authenticated()
-                .requestMatchers("/registration", "/login", "/image/**", "/person/*", "/person_image/add",
-                        "/level/**", "/feed", "/level/**", "/person/**", "/stats/**")
+                .requestMatchers("/registration", "/login", "/image/**",  "/person_image/add",
+                        "/level/**", "/feed", "/level/**", "/person/**", "/stats/**", "/feed/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
