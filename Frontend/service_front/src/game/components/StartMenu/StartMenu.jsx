@@ -17,7 +17,7 @@ const StartMenu = ({actions, toggle, playing}) => {
                     starter()
                 }}/>
                 <Button title="ВЫЙТИ" styles="pixel" color="darkred" action={() => navigate("/")}/>
-                <Button title={playing ? "ВКЛ МУЗЫКУ" : "ВЫКЛ МУЗЫКУ"} action={toggle} styles="pixel" color="red"/>
+                <Button title={playing ? "ВЫКЛ МУЗЫКУ" : "ВКЛ МУЗЫКУ"} action={toggle} styles="pixel" color="red"/>
             </div>
         </div>
 )

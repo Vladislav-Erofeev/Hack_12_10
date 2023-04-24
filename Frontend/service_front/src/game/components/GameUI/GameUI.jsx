@@ -4,7 +4,6 @@ import GameHeader from '../../UI/GameHeader/GameHeader'
 import classes from './GameUI.module.css'
 import GamePlay from '../GamePlay/GamePlay'
 import StartMenu from '../StartMenu/StartMenu'
-import {useLocation} from "react-router-dom";
 
 const GameUI = () => {
 
@@ -18,7 +17,7 @@ const GameUI = () => {
         setStart(false)
     }
 
-    const [audio] = useState(new Audio("fade_to_black.mp3"))
+    const [audio, setAudio] = useState(new Audio("fade_to_black.mp3"))
     const [playing, setPlaying] = useState(false)
 
     useEffect(() => {
@@ -26,13 +25,6 @@ const GameUI = () => {
     }, [playing])
 
     const toggle = () => setPlaying(!playing);
-
-    const location = useLocation();
-    useEffect(() => {
-        console.log(location.pathname)
-        if (location.pathname !== "/game")
-            audio.pause();
-    }, [location])
 
     useEffect(() => {
         return () => audio.pause()
@@ -47,7 +39,6 @@ const GameUI = () => {
                     <GamePlay/>
                 </div>
                 : <StartMenu actions={startGame} toggle={toggle} playing={playing}/>
-
             }
         </div>
     )

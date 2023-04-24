@@ -6,6 +6,8 @@ import {selectToken} from "../../redux/slices/security";
 import CustomCarousel from "../components/CustomCarousel";
 import {Button} from "reactstrap";
 import {selectUser} from "../../redux/slices/user";
+import "../components/FeedListComponent.css"
+import "./Feed.css"
 
 
 const Feed = () => {
@@ -16,6 +18,15 @@ const Feed = () => {
     const user = useSelector(selectUser)
 
     const [feed, setFeed] = useState(null)
+
+    const [userId, setUserId] = useState(0)
+
+    useEffect(() => {
+        if (user)
+            setUserId(user.id)
+        else
+            setUserId(0)
+    }, [user])
 
     useEffect(() => {
         get_feed(feedId).then(res => {
@@ -34,30 +45,31 @@ const Feed = () => {
     return (
         <div className="my-container">
             <div className="d-flex my-4">
-                <Link style={{width: "100px", height: "100px"}} to={`/user/${feed.author.id}`}>
-                    <img style={{width: "100%", height: "100%", borderRadius: "100%"}}
+                <Link className="profile-avatar" to={`/user/${feed.author.id}`}>
+                    <img className="profile-img"
                          src={feed.author.url === null
                              ? "https://i.stack.imgur.com/U9zFC.png?s=192&g=1"
                              : `${url}/image${feed.author.url}`
                          }/>
                 </Link>
-                <Link className="profile-info ms-5 text-decoration-none text-dark" to={`/user/${feed.author.id}`}>
+                <Link className="profile-info ms-2 text-decoration-none titel_one titel_one--media m-0" to={`/user/${feed.author.id}`}>
                     <h1>{feed.author.name}</h1>
                 </Link>
-            </div>
-            <div>
-                <p>{feed.body}</p>
-                <CustomCarousel images={feed.images}/>
-            </div>
-            <div>
                 {
-                    user.id === feed.author.id
-                        ? <Button className="ms-auto my-btn btn-user" onClick={event => {
+                    userId === feed.author.id
+                        ? <Button className="ms-auto my-btn btn-user align-self-start" onClick={event => {
                             event.preventDefault()
                             delete_feed(token, feedId)
                         }}>Удалить</Button>
                         : <></>
                 }
+            </div>
+            <div>
+                <p className="feed-body">{feed.body}</p>
+                <CustomCarousel images={feed.images}/>
+            </div>
+            <div className="mt-3">
+
             </div>
         </div>
     )
